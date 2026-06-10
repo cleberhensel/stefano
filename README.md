@@ -103,6 +103,7 @@ Muitos vídeos do YouTube têm intro (aplausos, fala) antes da música. Por faix
 | Vídeo com intro | Campo `offset_sec` por faixa |
 | YT sempre mudo | `mute: 1` no player + nunca ligar áudio do iframe |
 | Seek na barra | `seekTo(t)` nos 3: YT, vocals, guitar |
+| Arranque com drift alto | No clique Play, `preparePlayback()` espera stems (`canplay`) + YT (`CUED`) antes de iniciar |
 
 ## Próximos passos (ordem sugerida)
 

@@ -13,9 +13,9 @@
       "folder": "01 O que sera",
       "youtube_id": "_szSyzZVV4c",
       "youtube_url": "https://www.youtube.com/watch?v=_szSyzZVV4c",
+      "offset_sec": 0,
       "vocals": "01 O que sera/vocals.mp3",
       "guitar": "01 O que sera/guitar.mp3",
-      "offset_sec": 0,
       "duration_sec": 166.0
     },
     {
@@ -24,7 +24,10 @@
       "folder": "02 Roda Viva",
       "youtube_id": "fupIYBj-0lE",
       "youtube_url": "https://www.youtube.com/watch?v=fupIYBj-0lE",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "02 Roda Viva/vocals.mp3",
+      "guitar": "02 Roda Viva/guitar.mp3",
+      "duration_sec": 177.1
     },
     {
       "num": 3,
@@ -32,7 +35,10 @@
       "folder": "03 Gente Humilde",
       "youtube_id": "KZcSLK7Ya0s",
       "youtube_url": "https://www.youtube.com/watch?v=KZcSLK7Ya0s",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "03 Gente Humilde/vocals.mp3",
+      "guitar": "03 Gente Humilde/guitar.mp3",
+      "duration_sec": 193.21
     },
     {
       "num": 4,
@@ -40,7 +46,10 @@
       "folder": "04 O bebado e o equilibrista",
       "youtube_id": "xK8Bp_aOOhc",
       "youtube_url": "https://www.youtube.com/watch?v=xK8Bp_aOOhc",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "04 O bebado e o equilibrista/vocals.mp3",
+      "guitar": "04 O bebado e o equilibrista/guitar.mp3",
+      "duration_sec": 266.68
     },
     {
       "num": 5,
@@ -48,7 +57,10 @@
       "folder": "05 E preciso dar um jeito meu amigo",
       "youtube_id": "fKt-XwAbAUc",
       "youtube_url": "https://www.youtube.com/watch?v=fKt-XwAbAUc",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "05 E preciso dar um jeito meu amigo/vocals.mp3",
+      "guitar": "05 E preciso dar um jeito meu amigo/guitar.mp3",
+      "duration_sec": 224.61
     },
     {
       "num": 6,
@@ -56,7 +68,10 @@
       "folder": "06 Apesar de voce",
       "youtube_id": "iR1zWZc19yA",
       "youtube_url": "https://www.youtube.com/watch?v=iR1zWZc19yA",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "06 Apesar de voce/vocals.mp3",
+      "guitar": "06 Apesar de voce/guitar.mp3",
+      "duration_sec": 243.37
     },
     {
       "num": 7,
@@ -64,7 +79,10 @@
       "folder": "07 Cotidiano",
       "youtube_id": "_ySl6SAZIe4",
       "youtube_url": "https://www.youtube.com/watch?v=_ySl6SAZIe4",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "07 Cotidiano/vocals.mp3",
+      "guitar": "07 Cotidiano/guitar.mp3",
+      "duration_sec": 167.6
     },
     {
       "num": 8,
@@ -72,7 +90,10 @@
       "folder": "08 Construcao",
       "youtube_id": "4P-ZutZEeZA",
       "youtube_url": "https://www.youtube.com/watch?v=4P-ZutZEeZA",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "08 Construcao/vocals.mp3",
+      "guitar": "08 Construcao/guitar.mp3",
+      "duration_sec": 304.18
     },
     {
       "num": 9,
@@ -80,7 +101,10 @@
       "folder": "09 Essa moca ta diferente",
       "youtube_id": "XEEB1U2inqc",
       "youtube_url": "https://www.youtube.com/watch?v=XEEB1U2inqc",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "09 Essa moca ta diferente/vocals.mp3",
+      "guitar": "09 Essa moca ta diferente/guitar.mp3",
+      "duration_sec": 129.99
     },
     {
       "num": 10,
@@ -88,7 +112,10 @@
       "folder": "10 Trocando em miudos",
       "youtube_id": "6XSlQTqcoaY",
       "youtube_url": "https://www.youtube.com/watch?v=6XSlQTqcoaY",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "10 Trocando em miudos/vocals.mp3",
+      "guitar": "10 Trocando em miudos/guitar.mp3",
+      "duration_sec": 171.18
     },
     {
       "num": 11,
@@ -96,7 +123,10 @@
       "folder": "11 Joao e Maria",
       "youtube_id": "1jJItSUErFs",
       "youtube_url": "https://www.youtube.com/watch?v=1jJItSUErFs",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "11 Joao e Maria/vocals.mp3",
+      "guitar": "11 Joao e Maria/guitar.mp3",
+      "duration_sec": 164.51
     },
     {
       "num": 12,
@@ -104,7 +134,10 @@
       "folder": "12 Azul",
       "youtube_id": "3Y5KhHQETl8",
       "youtube_url": "https://www.youtube.com/watch?v=3Y5KhHQETl8",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "12 Azul/vocals.mp3",
+      "guitar": "12 Azul/guitar.mp3",
+      "duration_sec": 224.51
     },
     {
       "num": 13,
@@ -112,7 +145,10 @@
       "folder": "13 Eu te amo",
       "youtube_id": "6yakscP9sgE",
       "youtube_url": "https://www.youtube.com/watch?v=6yakscP9sgE",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "13 Eu te amo/vocals.mp3",
+      "guitar": "13 Eu te amo/guitar.mp3",
+      "duration_sec": 152.83
     },
     {
       "num": 14,
@@ -120,7 +156,10 @@
       "folder": "14 Todo o Sentimento",
       "youtube_id": "AsE-RfBQ0eo",
       "youtube_url": "https://www.youtube.com/watch?v=AsE-RfBQ0eo",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "14 Todo o Sentimento/vocals.mp3",
+      "guitar": "14 Todo o Sentimento/guitar.mp3",
+      "duration_sec": 225.67
     },
     {
       "num": 15,
@@ -128,7 +167,10 @@
       "folder": "15 Calice",
       "youtube_id": "nx0Qs-zmIBc",
       "youtube_url": "https://www.youtube.com/watch?v=nx0Qs-zmIBc",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "15 Calice/vocals.mp3",
+      "guitar": "15 Calice/guitar.mp3",
+      "duration_sec": 262.06
     },
     {
       "num": 16,
@@ -136,7 +178,10 @@
       "folder": "16 Olhos nos olhos",
       "youtube_id": "kVqvicbGqXQ",
       "youtube_url": "https://www.youtube.com/watch?v=kVqvicbGqXQ",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "16 Olhos nos olhos/vocals.mp3",
+      "guitar": "16 Olhos nos olhos/guitar.mp3",
+      "duration_sec": 150.44
     },
     {
       "num": 17,
@@ -144,7 +189,10 @@
       "folder": "17 A Banda",
       "youtube_id": "rU_xRkhpf60",
       "youtube_url": "https://www.youtube.com/watch?v=rU_xRkhpf60",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "17 A Banda/vocals.mp3",
+      "guitar": "17 A Banda/guitar.mp3",
+      "duration_sec": 133.35
     },
     {
       "num": 18,
@@ -152,7 +200,10 @@
       "folder": "18 Pedaco de Mim",
       "youtube_id": "FZUoR6vAyG8",
       "youtube_url": "https://www.youtube.com/watch?v=FZUoR6vAyG8",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "18 Pedaco de Mim/vocals.mp3",
+      "guitar": "18 Pedaco de Mim/guitar.mp3",
+      "duration_sec": 215.43
     },
     {
       "num": 19,
@@ -160,7 +211,10 @@
       "folder": "19 Samba e Amor",
       "youtube_id": "fauIobjSIbs",
       "youtube_url": "https://www.youtube.com/watch?v=fauIobjSIbs",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "19 Samba e Amor/vocals.mp3",
+      "guitar": "19 Samba e Amor/guitar.mp3",
+      "duration_sec": 199.39
     },
     {
       "num": 20,
@@ -168,7 +222,10 @@
       "folder": "20 Tatuagem",
       "youtube_id": "bu-n2iCtYn8",
       "youtube_url": "https://www.youtube.com/watch?v=bu-n2iCtYn8",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "20 Tatuagem/vocals.mp3",
+      "guitar": "20 Tatuagem/guitar.mp3",
+      "duration_sec": 178.52
     },
     {
       "num": 21,
@@ -176,7 +233,10 @@
       "folder": "21 A Historia de Lilly Braun",
       "youtube_id": "OXxMVJL2ZaQ",
       "youtube_url": "https://www.youtube.com/watch?v=OXxMVJL2ZaQ",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "21 A Historia de Lilly Braun/vocals.mp3",
+      "guitar": "21 A Historia de Lilly Braun/guitar.mp3",
+      "duration_sec": 165.26
     },
     {
       "num": 22,
@@ -184,6 +244,38 @@
       "folder": "22 Folhetim",
       "youtube_id": "7lp7Pp4b-mE",
       "youtube_url": "https://www.youtube.com/watch?v=7lp7Pp4b-mE",
+      "offset_sec": 0
+    },
+    {
+      "num": 23,
+      "title": "O Mundo é um moinho",
+      "folder": "23 O Mundo e um moinho",
+      "youtube_id": "AOc0i-Nih7Y",
+      "youtube_url": "https://www.youtube.com/watch?v=AOc0i-Nih7Y",
+      "offset_sec": 0
+    },
+    {
+      "num": 24,
+      "title": "Naquela mesa",
+      "folder": "24 Naquela mesa",
+      "youtube_id": "VLq4eFuAAjA",
+      "youtube_url": "https://www.youtube.com/watch?v=VLq4eFuAAjA",
+      "offset_sec": 0
+    },
+    {
+      "num": 25,
+      "title": "Carinhoso",
+      "folder": "25 Carinhoso",
+      "youtube_id": "59rhQlNhqy8",
+      "youtube_url": "https://www.youtube.com/watch?v=59rhQlNhqy8",
+      "offset_sec": 0
+    },
+    {
+      "num": 26,
+      "title": "Disritmia",
+      "folder": "26 Disritmia",
+      "youtube_id": "Wokf65PcvpQ",
+      "youtube_url": "https://www.youtube.com/watch?v=Wokf65PcvpQ",
       "offset_sec": 0
     }
   ]
