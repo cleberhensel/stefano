@@ -491,6 +491,8 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      --cifra-diagrams-max: 42%;
+      --cifra-diagrams-min: 172px;
       padding-top: 26px;
       border-radius: 10px;
       border: 1px solid rgba(255, 255, 255, .14);
@@ -588,7 +590,7 @@
       color: #fff;
     }
     .cifra-panel__body {
-      flex: 1;
+      flex: 1 1 0%;
       min-height: 0;
       overflow: auto;
       overflow-x: hidden;
@@ -607,11 +609,68 @@
     .cifra-panel:hover .cifra-panel__body::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, .28);
     }
-    .cifra-panel__diagrams {
-      flex: 0 1 auto;
-      max-height: 44%;
+    .cifra-panel__diagrams-section {
+      flex: 0 0 auto;
       min-height: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .cifra-panel:not(.is-diagrams-collapsed) .cifra-panel__diagrams-section {
+      flex: 0 0 auto;
+      min-height: var(--cifra-diagrams-min);
+      max-height: max(var(--cifra-diagrams-min), var(--cifra-diagrams-max));
+    }
+    .cifra-panel__diagrams-toggle {
+      flex-shrink: 0;
+      width: 100%;
+      border: 0;
       border-top: 1px solid rgba(255, 255, 255, .1);
+      background: transparent;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 .55rem;
+      gap: .32rem;
+      cursor: pointer;
+      font-family: inherit;
+      color: rgba(255, 255, 255, .55);
+      transition: color .15s ease, background .15s ease;
+    }
+    .cifra-panel__diagrams-toggle:hover {
+      color: rgba(255, 255, 255, .9);
+      background: rgba(255, 255, 255, .04);
+    }
+    .cifra-panel__diagrams-icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.1;
+      stroke-linecap: round;
+    }
+    .cifra-panel__diagrams-chevron {
+      width: 10px;
+      height: 10px;
+      flex-shrink: 0;
+      fill: currentColor;
+      opacity: .9;
+      transition: transform .22s ease;
+    }
+    .cifra-panel.is-diagrams-collapsed .cifra-panel__diagrams-chevron {
+      transform: rotate(180deg);
+    }
+    .cifra-panel.is-diagrams-collapsed .cifra-panel__diagrams {
+      display: none;
+    }
+    .cifra-panel:not(.is-diagrams-collapsed) .cifra-panel__diagrams {
+      min-height: calc(var(--cifra-diagrams-min) - 24px);
+    }
+    .cifra-panel__diagrams {
+      flex: 1 1 auto;
+      min-height: 0;
       padding: .35rem .3rem .45rem;
       overflow-y: auto;
       overflow-x: hidden;
@@ -637,6 +696,7 @@
       grid-template-columns: repeat(5, 1fr);
       gap: .1rem;
       align-items: end;
+      min-height: 62px;
     }
     .cifra-prog__slot {
       border: 0;
@@ -725,15 +785,30 @@
   <div class="overlay" aria-hidden="true"></div>
   <div class="ambient-bleed" aria-hidden="true"></div>
 
-  <aside class="cifra-panel" id="cifra-panel" aria-hidden="true" aria-label="Cifra e acordes">
+  <aside class="cifra-panel is-diagrams-collapsed" id="cifra-panel" aria-hidden="true" aria-label="Cifra e acordes">
     <header class="cifra-panel__head" id="cifra-head">
       <button type="button" class="cifra-panel__close" id="cifra-close" aria-label="Fechar cifra">×</button>
     </header>
     <div class="cifra-panel__body" id="cifra-body">
       <p class="cifra-empty">Abra uma faixa com cifra disponível.</p>
     </div>
-    <div class="cifra-panel__diagrams" id="cifra-diagrams" aria-label="Progressão de acordes">
-      <div class="cifra-prog-grid" id="cifra-prog-grid"></div>
+    <div class="cifra-panel__diagrams-section" id="cifra-diagrams-section">
+      <button type="button" class="cifra-panel__diagrams-toggle" id="cifra-diagrams-toggle" aria-expanded="false" aria-controls="cifra-diagrams" aria-label="Diagramas de acordes" title="Expandir diagramas">
+        <svg class="cifra-panel__diagrams-icon" viewBox="0 0 16 16" aria-hidden="true">
+          <line x1="3" y1="5.5" x2="13" y2="5.5"/>
+          <line x1="3" y1="8.5" x2="13" y2="8.5"/>
+          <line x1="3" y1="11.5" x2="13" y2="11.5"/>
+          <line x1="5" y1="4" x2="5" y2="13"/>
+          <line x1="8" y1="4" x2="8" y2="13"/>
+          <line x1="11" y1="4" x2="11" y2="13"/>
+          <circle cx="8" cy="8.5" r="1.15" fill="currentColor" stroke="none"/>
+          <circle cx="11" cy="5.5" r="1.15" fill="currentColor" stroke="none"/>
+        </svg>
+        <svg class="cifra-panel__diagrams-chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8 9.5 4.5"/></svg>
+      </button>
+      <div class="cifra-panel__diagrams" id="cifra-diagrams" aria-label="Progressão de acordes">
+        <div class="cifra-prog-grid" id="cifra-prog-grid"></div>
+      </div>
     </div>
     <button type="button" class="cifra-panel__resize cifra-panel__resize--bl" id="cifra-resize-bl" aria-label="Redimensionar canto inferior esquerdo" data-resize="bl"></button>
     <button type="button" class="cifra-panel__resize cifra-panel__resize--br" id="cifra-resize-br" aria-label="Redimensionar canto inferior direito" data-resize="br"></button>

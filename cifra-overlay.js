@@ -166,6 +166,7 @@
   const state = {
     dict: null,
     open: false,
+    diagramsCollapsed: true,
     chordProgression: [],
     activeIndex: -1,
     drag: null,
@@ -226,6 +227,16 @@
     if (slot) slot.scrollIntoView({ block: "nearest", behavior: "smooth" });
   }
 
+  function setDiagramsCollapsed(collapsed) {
+    state.diagramsCollapsed = collapsed;
+    els.panel.classList.toggle("is-diagrams-collapsed", collapsed);
+    if (els.diagramsToggle) {
+      els.diagramsToggle.setAttribute("aria-expanded", String(!collapsed));
+      els.diagramsToggle.title = collapsed ? "Expandir diagramas" : "Recolher diagramas";
+    }
+    saveLayout();
+  }
+
   function setOpen(on) {
     state.open = on;
     els.panel.classList.toggle("is-open", on);
@@ -240,16 +251,20 @@
   }
 
   function restoreLayout() {
+    let diagramsCollapsed = true;
     try {
       const raw = localStorage.getItem("stefano-cifra-layout");
-      if (!raw) return;
-      const layout = JSON.parse(raw);
-      if (layout.w) els.panel.style.width = layout.w;
-      if (layout.h) els.panel.style.height = layout.h;
-      if (layout.l != null) els.panel.style.left = layout.l;
-      if (layout.t != null) els.panel.style.top = layout.t;
-      if (layout.open === "1") setOpen(true);
+      if (raw) {
+        const layout = JSON.parse(raw);
+        if (layout.w) els.panel.style.width = layout.w;
+        if (layout.h) els.panel.style.height = layout.h;
+        if (layout.l != null) els.panel.style.left = layout.l;
+        if (layout.t != null) els.panel.style.top = layout.t;
+        if (layout.open === "1") setOpen(true);
+        if (layout.diagramsCollapsed === "0") diagramsCollapsed = false;
+      }
     } catch (_) {}
+    setDiagramsCollapsed(diagramsCollapsed);
   }
 
   function saveLayout() {
@@ -263,6 +278,7 @@
           l: els.panel.style.left,
           t: els.panel.style.top,
           open: state.open ? "1" : "0",
+          diagramsCollapsed: state.diagramsCollapsed ? "1" : "0",
         }),
       );
     } catch (_) {}
@@ -392,6 +408,7 @@
       head: document.getElementById("cifra-head"),
       body: document.getElementById("cifra-body"),
       progGrid: document.getElementById("cifra-prog-grid"),
+      diagramsToggle: document.getElementById("cifra-diagrams-toggle"),
       toggle: document.getElementById("btn-cifra"),
       close: document.getElementById("cifra-close"),
     };
@@ -408,6 +425,14 @@
     els.panel.addEventListener("click", (e) => e.stopPropagation());
     els.panel.addEventListener("mousedown", (e) => e.stopPropagation());
     els.close.addEventListener("click", () => setOpen(false));
+
+    if (els.diagramsToggle) {
+      els.diagramsToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        setDiagramsCollapsed(!state.diagramsCollapsed);
+      });
+      els.diagramsToggle.addEventListener("mousedown", (e) => e.stopPropagation());
+    }
 
     els.body.addEventListener("click", (e) => {
       const btn = e.target.closest(".cifra-chord");
