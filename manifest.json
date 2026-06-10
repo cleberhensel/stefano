@@ -16,7 +16,10 @@
       "offset_sec": 0,
       "vocals": "01 O que sera/vocals.mp3",
       "guitar": "01 O que sera/guitar.mp3",
-      "duration_sec": 166.0
+      "duration_sec": 166.0,
+      "cifra": "cifras/01-o-que-sera.txt",
+      "cifra_key": "Dm",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/o-que-sera-a-flor-da-pele/"
     },
     {
       "num": 2,
@@ -27,7 +30,10 @@
       "offset_sec": 0,
       "vocals": "02 Roda Viva/vocals.mp3",
       "guitar": "02 Roda Viva/guitar.mp3",
-      "duration_sec": 177.1
+      "duration_sec": 177.1,
+      "cifra": "cifras/02-roda-viva.txt",
+      "cifra_key": "Bm",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/roda-viva/"
     },
     {
       "num": 3,
@@ -38,7 +44,10 @@
       "offset_sec": 0,
       "vocals": "03 Gente Humilde/vocals.mp3",
       "guitar": "03 Gente Humilde/guitar.mp3",
-      "duration_sec": 193.21
+      "duration_sec": 193.21,
+      "cifra": "cifras/03-gente-humilde.txt",
+      "cifra_key": "F",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/gente-humilde/"
     },
     {
       "num": 4,
@@ -49,7 +58,10 @@
       "offset_sec": 0,
       "vocals": "04 O bebado e o equilibrista/vocals.mp3",
       "guitar": "04 O bebado e o equilibrista/guitar.mp3",
-      "duration_sec": 266.68
+      "duration_sec": 266.68,
+      "cifra": "cifras/04-o-bebado-e-o-equilibrista.txt",
+      "cifra_key": "A",
+      "cifra_source": "https://www.cifras.com.br/cifra/joao-bosco/o-bebado-e-a-equilibrista"
     },
     {
       "num": 5,
@@ -60,7 +72,10 @@
       "offset_sec": 0,
       "vocals": "05 E preciso dar um jeito meu amigo/vocals.mp3",
       "guitar": "05 E preciso dar um jeito meu amigo/guitar.mp3",
-      "duration_sec": 224.61
+      "duration_sec": 224.61,
+      "cifra": "cifras/05-e-preciso-dar-um-jeito.txt",
+      "cifra_key": "Fm",
+      "cifra_source": "https://www.cifraclub.com.br/erasmo-carlos/e-preciso-dar-um-jeito-meu-amigo/"
     },
     {
       "num": 6,
@@ -71,7 +86,10 @@
       "offset_sec": 0,
       "vocals": "06 Apesar de voce/vocals.mp3",
       "guitar": "06 Apesar de voce/guitar.mp3",
-      "duration_sec": 243.37
+      "duration_sec": 243.37,
+      "cifra": "cifras/06-apesar-de-voce.txt",
+      "cifra_key": "D",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/apesar-de-voce/"
     },
     {
       "num": 7,
@@ -82,7 +100,10 @@
       "offset_sec": 0,
       "vocals": "07 Cotidiano/vocals.mp3",
       "guitar": "07 Cotidiano/guitar.mp3",
-      "duration_sec": 167.6
+      "duration_sec": 167.6,
+      "cifra": "cifras/07-cotidiano.txt",
+      "cifra_key": "Bb",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/cotidiano/"
     },
     {
       "num": 8,
@@ -93,7 +114,10 @@
       "offset_sec": 0,
       "vocals": "08 Construcao/vocals.mp3",
       "guitar": "08 Construcao/guitar.mp3",
-      "duration_sec": 304.18
+      "duration_sec": 304.18,
+      "cifra": "cifras/08-construcao.txt",
+      "cifra_key": "Em",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/construcao/"
     },
     {
       "num": 9,
@@ -104,7 +128,10 @@
       "offset_sec": 0,
       "vocals": "09 Essa moca ta diferente/vocals.mp3",
       "guitar": "09 Essa moca ta diferente/guitar.mp3",
-      "duration_sec": 129.99
+      "duration_sec": 129.99,
+      "cifra": "cifras/09-essa-moca-ta-diferente.txt",
+      "cifra_key": "Bm",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/essa-moca-ta-diferente/"
     },
     {
       "num": 10,
@@ -115,7 +142,10 @@
       "offset_sec": 0,
       "vocals": "10 Trocando em miudos/vocals.mp3",
       "guitar": "10 Trocando em miudos/guitar.mp3",
-      "duration_sec": 171.18
+      "duration_sec": 171.18,
+      "cifra": "cifras/10-trocando-em-miudos.txt",
+      "cifra_key": "C",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/trocando-em-miudos/"
     },
     {
       "num": 11,
@@ -126,7 +156,10 @@
       "offset_sec": 0,
       "vocals": "11 Joao e Maria/vocals.mp3",
       "guitar": "11 Joao e Maria/guitar.mp3",
-      "duration_sec": 164.51
+      "duration_sec": 164.51,
+      "cifra": "cifras/11-joao-e-maria.txt",
+      "cifra_key": "Am",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/joao-maria/"
     },
     {
       "num": 12,
@@ -137,7 +170,10 @@
       "offset_sec": 0,
       "vocals": "12 Azul/vocals.mp3",
       "guitar": "12 Azul/guitar.mp3",
-      "duration_sec": 224.51
+      "duration_sec": 224.51,
+      "cifra": "cifras/12-azul.txt",
+      "cifra_key": "Dm",
+      "cifra_source": "https://www.cifraclub.com.br/djavan/azul/"
     },
     {
       "num": 13,
@@ -148,7 +184,10 @@
       "offset_sec": 0,
       "vocals": "13 Eu te amo/vocals.mp3",
       "guitar": "13 Eu te amo/guitar.mp3",
-      "duration_sec": 152.83
+      "duration_sec": 152.83,
+      "cifra": "cifras/13-eu-te-amo.txt",
+      "cifra_key": "C",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/eu-te-amo/"
     },
     {
       "num": 14,
@@ -159,7 +198,10 @@
       "offset_sec": 0,
       "vocals": "14 Todo o Sentimento/vocals.mp3",
       "guitar": "14 Todo o Sentimento/guitar.mp3",
-      "duration_sec": 225.67
+      "duration_sec": 225.67,
+      "cifra": "cifras/14-todo-o-sentimento.txt",
+      "cifra_key": "C",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/todo-sentimento/"
     },
     {
       "num": 15,
@@ -170,7 +212,10 @@
       "offset_sec": 0,
       "vocals": "15 Calice/vocals.mp3",
       "guitar": "15 Calice/guitar.mp3",
-      "duration_sec": 262.06
+      "duration_sec": 262.06,
+      "cifra": "cifras/15-calice.txt",
+      "cifra_key": "E",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/calice/"
     },
     {
       "num": 16,
@@ -181,7 +226,10 @@
       "offset_sec": 0,
       "vocals": "16 Olhos nos olhos/vocals.mp3",
       "guitar": "16 Olhos nos olhos/guitar.mp3",
-      "duration_sec": 150.44
+      "duration_sec": 150.44,
+      "cifra": "cifras/16-olhos-nos-olhos.txt",
+      "cifra_key": "A",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/olhos-nos-olhos/"
     },
     {
       "num": 17,
@@ -192,7 +240,10 @@
       "offset_sec": 0,
       "vocals": "17 A Banda/vocals.mp3",
       "guitar": "17 A Banda/guitar.mp3",
-      "duration_sec": 133.35
+      "duration_sec": 133.35,
+      "cifra": "cifras/17-a-banda.txt",
+      "cifra_key": "D",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/a-banda/"
     },
     {
       "num": 18,
@@ -203,7 +254,10 @@
       "offset_sec": 0,
       "vocals": "18 Pedaco de Mim/vocals.mp3",
       "guitar": "18 Pedaco de Mim/guitar.mp3",
-      "duration_sec": 215.43
+      "duration_sec": 215.43,
+      "cifra": "cifras/18-pedaco-de-mim.txt",
+      "cifra_key": "G",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/pedaco-de-mim/"
     },
     {
       "num": 19,
@@ -214,7 +268,10 @@
       "offset_sec": 0,
       "vocals": "19 Samba e Amor/vocals.mp3",
       "guitar": "19 Samba e Amor/guitar.mp3",
-      "duration_sec": 199.39
+      "duration_sec": 199.39,
+      "cifra": "cifras/19-samba-e-amor.txt",
+      "cifra_key": "Cm",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/samba-amor/"
     },
     {
       "num": 20,
@@ -225,7 +282,10 @@
       "offset_sec": 0,
       "vocals": "20 Tatuagem/vocals.mp3",
       "guitar": "20 Tatuagem/guitar.mp3",
-      "duration_sec": 178.52
+      "duration_sec": 178.52,
+      "cifra": "cifras/20-tatuagem.txt",
+      "cifra_key": "C",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/tatuagem/"
     },
     {
       "num": 21,
@@ -236,7 +296,10 @@
       "offset_sec": 0,
       "vocals": "21 A Historia de Lilly Braun/vocals.mp3",
       "guitar": "21 A Historia de Lilly Braun/guitar.mp3",
-      "duration_sec": 165.26
+      "duration_sec": 165.26,
+      "cifra": "cifras/21-a-historia-de-lilly-braun.txt",
+      "cifra_key": "C",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/a-historia-de-lily-braun/"
     },
     {
       "num": 22,
@@ -247,7 +310,10 @@
       "offset_sec": 0,
       "vocals": "22 Folhetim/vocals.mp3",
       "guitar": "22 Folhetim/guitar.mp3",
-      "duration_sec": 170.13
+      "duration_sec": 170.13,
+      "cifra": "cifras/22-folhetim.txt",
+      "cifra_key": "G",
+      "cifra_source": "https://www.cifraclub.com.br/chico-buarque/folhetim/"
     },
     {
       "num": 23,
@@ -258,7 +324,10 @@
       "offset_sec": 0,
       "vocals": "23 O Mundo e um moinho/vocals.mp3",
       "guitar": "23 O Mundo e um moinho/guitar.mp3",
-      "duration_sec": 207.55
+      "duration_sec": 207.55,
+      "cifra": "cifras/23-o-mundo-e-um-moinho.txt",
+      "cifra_key": "A",
+      "cifra_source": "https://www.cifraclub.com.br/cartola/o-mundo-um-moinho/"
     },
     {
       "num": 24,
@@ -269,7 +338,10 @@
       "offset_sec": 0,
       "vocals": "24 Naquela mesa/vocals.mp3",
       "guitar": "24 Naquela mesa/guitar.mp3",
-      "duration_sec": 175.06
+      "duration_sec": 175.06,
+      "cifra": "cifras/24-naquela-mesa.txt",
+      "cifra_key": "Dm",
+      "cifra_source": "https://www.cifraclub.com.br/nelson-goncalves/naquela-mesa/"
     },
     {
       "num": 25,
@@ -280,7 +352,10 @@
       "offset_sec": 0,
       "vocals": "25 Carinhoso/vocals.mp3",
       "guitar": "25 Carinhoso/guitar.mp3",
-      "duration_sec": 201.58
+      "duration_sec": 201.58,
+      "cifra": "cifras/25-carinhoso.txt",
+      "cifra_key": "G",
+      "cifra_source": "https://www.cifraclub.com.br/pixinguinha/carinhoso/"
     },
     {
       "num": 26,
@@ -291,7 +366,10 @@
       "offset_sec": 0,
       "vocals": "26 Disritmia/vocals.mp3",
       "guitar": "26 Disritmia/guitar.mp3",
-      "duration_sec": 143.53
+      "duration_sec": 143.53,
+      "cifra": "cifras/26-disritmia.txt",
+      "cifra_key": "A",
+      "cifra_source": "https://www.cifraclub.com.br/martinho-da-vila/disritmia/"
     }
   ]
 }

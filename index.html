@@ -434,13 +434,312 @@
       :root { --player-h: 54px; --sidebar-w: 210px; --video-lift: 56px; }
       .track-copy h2 { font-size: .74rem; }
       .sync-hint { display: none; }
+      .cifra-panel { width: min(92vw, 340px) !important; max-height: 52vh; }
     }
+
+    /* —— Cifra overlay (protótipo v1) —— */
+    .cifra-fab {
+      position: fixed;
+      top: max(14px, calc(var(--video-lift) * 0.28));
+      right: 18px;
+      z-index: 11;
+      font-family: inherit;
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .42rem .72rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .22);
+      background: rgba(8, 12, 18, .42);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: rgba(255, 255, 255, .88);
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, .28);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-5px);
+      transition: opacity .32s ease, transform .32s ease, border-color .2s ease, color .2s ease, background .2s ease;
+    }
+    .cifra-fab.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .cifra-fab:hover {
+      border-color: rgba(255, 255, 255, .36);
+      background: rgba(12, 18, 26, .55);
+      color: #fff;
+    }
+    .cifra-fab[aria-pressed="true"] {
+      border-color: var(--guitar);
+      color: var(--guitar);
+      background: rgba(168, 224, 188, .14);
+    }
+    .cifra-panel {
+      position: fixed;
+      z-index: 12;
+      top: 12%;
+      left: calc(var(--sidebar-w) + 16px);
+      width: min(420px, calc(100vw - var(--sidebar-w) - 32px));
+      height: min(58vh, 520px);
+      min-width: 260px;
+      min-height: 200px;
+      max-width: calc(100vw - 24px);
+      max-height: calc(var(--stage-h) - 24px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding-top: 26px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(0, 0, 0, .08);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04);
+      color: #fff;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: opacity .28s ease, transform .28s ease, border-color .2s ease;
+    }
+    .cifra-panel__resize {
+      position: absolute;
+      bottom: 0;
+      width: 18px;
+      height: 18px;
+      z-index: 3;
+      background: transparent;
+      border: 0;
+      padding: 0;
+    }
+    .cifra-panel__resize::after {
+      content: "";
+      position: absolute;
+      bottom: 5px;
+      width: 9px;
+      height: 9px;
+      opacity: .65;
+      transition: opacity .15s ease;
+    }
+    .cifra-panel:hover .cifra-panel__resize::after,
+    .cifra-panel.is-resizing .cifra-panel__resize::after {
+      opacity: .95;
+    }
+    .cifra-panel__resize--br {
+      right: 0;
+      cursor: nwse-resize;
+    }
+    .cifra-panel__resize--br::after {
+      right: 5px;
+      border-right: 1.5px solid rgba(255, 255, 255, .32);
+      border-bottom: 1.5px solid rgba(255, 255, 255, .32);
+    }
+    .cifra-panel__resize--bl {
+      left: 0;
+      cursor: nesw-resize;
+    }
+    .cifra-panel__resize--bl::after {
+      left: 5px;
+      border-left: 1.5px solid rgba(255, 255, 255, .32);
+      border-bottom: 1.5px solid rgba(255, 255, 255, .32);
+    }
+    .cifra-panel:hover {
+      border-color: rgba(255, 255, 255, .22);
+    }
+    .cifra-panel.is-open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .cifra-panel.is-dragging,
+    .cifra-panel.is-resizing { transition: none; user-select: none; }
+    .cifra-panel__head {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 .35rem;
+      cursor: grab;
+      z-index: 2;
+    }
+    .cifra-panel.is-dragging .cifra-panel__head { cursor: grabbing; }
+    .cifra-panel__close {
+      border: 0;
+      background: transparent;
+      color: rgba(255, 255, 255, .72);
+      font-size: 1.05rem;
+      line-height: 1;
+      cursor: pointer;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      transition: background .15s ease, color .15s ease;
+    }
+    .cifra-panel__close:hover {
+      background: rgba(255, 255, 255, .1);
+      color: #fff;
+    }
+    .cifra-panel__body {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      overflow-x: hidden;
+      padding: 0 .55rem .5rem;
+      font-size: .78rem;
+      line-height: 1.45;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, .22) transparent;
+    }
+    .cifra-panel__body::-webkit-scrollbar { width: 5px; }
+    .cifra-panel__body::-webkit-scrollbar-track { background: transparent; }
+    .cifra-panel__body::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, .18);
+      border-radius: 4px;
+    }
+    .cifra-panel:hover .cifra-panel__body::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, .28);
+    }
+    .cifra-panel__diagrams {
+      flex: 0 1 auto;
+      max-height: 44%;
+      min-height: 0;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      padding: .35rem .3rem .45rem;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, .22) transparent;
+    }
+    .cifra-panel__diagrams::-webkit-scrollbar { width: 5px; }
+    .cifra-panel__diagrams::-webkit-scrollbar-track { background: transparent; }
+    .cifra-panel__diagrams::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, .18);
+      border-radius: 4px;
+    }
+    .cifra-panel:hover .cifra-panel__diagrams::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, .28);
+    }
+    .cifra-prog-grid {
+      display: flex;
+      flex-direction: column;
+      gap: .18rem;
+    }
+    .cifra-prog-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: .1rem;
+      align-items: end;
+    }
+    .cifra-prog__slot {
+      border: 0;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      opacity: .78;
+      transition: opacity .15s ease, transform .15s ease;
+    }
+    .cifra-prog__slot:hover { opacity: .95; }
+    .cifra-prog__slot.is-active {
+      opacity: 1;
+      transform: scale(1.04);
+    }
+    .cifra-prog__slot.is-active .cifra-diagram text { fill: #fff; }
+    .cifra-prog__slot.is-active .cifra-diagram circle { fill: #fff; }
+    .cifra-prog__slot.is-empty { visibility: hidden; pointer-events: none; }
+    .cifra-prog__slot.is-missing {
+      font-size: .62rem;
+      color: rgba(255, 255, 255, .45);
+      text-align: center;
+      padding: .5rem 0;
+      cursor: default;
+    }
+    .cifra-prog__empty {
+      grid-column: 1 / -1;
+      font-size: .68rem;
+      color: rgba(255, 255, 255, .45);
+      text-align: center;
+      padding: .35rem 0;
+    }
+    .cifra-line--chords {
+      font-family: "JetBrains Mono", "SF Mono", ui-monospace, monospace;
+      font-size: .7rem;
+      letter-spacing: .02em;
+      color: #fff;
+      margin-bottom: .08rem;
+      white-space: pre;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, .55);
+    }
+    .cifra-line--lyrics {
+      color: rgba(255, 255, 255, .92);
+      margin-bottom: .55rem;
+      white-space: pre-wrap;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, .55);
+    }
+    .cifra-sec {
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--vocals);
+      margin: .5rem 0 .35rem;
+    }
+    .cifra-gap { height: .35rem; }
+    .cifra-chord {
+      border: 0;
+      background: transparent;
+      color: #fff;
+      font: inherit;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-color: rgba(168, 224, 188, .45);
+      text-underline-offset: 2px;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, .55);
+    }
+    .cifra-chord:hover,
+    .cifra-chord.is-active {
+      color: var(--guitar);
+      text-decoration-color: var(--guitar);
+    }
+    .cifra-empty {
+      font-size: .74rem;
+      color: rgba(240, 248, 252, .55);
+    }
+    .cifra-diagram { display: block; }
   </style>
 </head>
 <body>
   <div class="yt-bg" aria-hidden="true"><div id="yt-player-host"></div></div>
   <div class="overlay" aria-hidden="true"></div>
   <div class="ambient-bleed" aria-hidden="true"></div>
+
+  <aside class="cifra-panel" id="cifra-panel" aria-hidden="true" aria-label="Cifra e acordes">
+    <header class="cifra-panel__head" id="cifra-head">
+      <button type="button" class="cifra-panel__close" id="cifra-close" aria-label="Fechar cifra">×</button>
+    </header>
+    <div class="cifra-panel__body" id="cifra-body">
+      <p class="cifra-empty">Abra uma faixa com cifra disponível.</p>
+    </div>
+    <div class="cifra-panel__diagrams" id="cifra-diagrams" aria-label="Progressão de acordes">
+      <div class="cifra-prog-grid" id="cifra-prog-grid"></div>
+    </div>
+    <button type="button" class="cifra-panel__resize cifra-panel__resize--bl" id="cifra-resize-bl" aria-label="Redimensionar canto inferior esquerdo" data-resize="bl"></button>
+    <button type="button" class="cifra-panel__resize cifra-panel__resize--br" id="cifra-resize-br" aria-label="Redimensionar canto inferior direito" data-resize="br"></button>
+  </aside>
+
+  <button type="button" class="cifra-fab" id="btn-cifra" aria-pressed="false" title="Cifra e diagramas">Cifra</button>
 
   <div class="sidebar-peek" id="sidebar-peek" aria-hidden="true"></div>
 
@@ -500,6 +799,7 @@
   </footer>
 
   <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="cifra-overlay.js"></script>
   <script>
     const SYNC_THRESHOLD = 0.04;
     const YT_DRIFT_THRESHOLD = 0.12;
@@ -535,6 +835,7 @@
 
     const SIDEBAR_IDLE_MS = 3200;
     let sidebarHideTimer = null;
+    let cifraFabHideTimer = null;
 
     const els = {
       stageBg: document.querySelector(".yt-bg"),
@@ -949,6 +1250,8 @@
       });
 
       updatePlayButtonState();
+      if (window.CifraOverlay) CifraOverlay.loadForTrack(track);
+      else window.__stefanoCifraTrack = track;
 
       if (!hasStems) {
         duration = 0;
@@ -1178,11 +1481,39 @@
       }, SIDEBAR_IDLE_MS);
     }
 
-    document.addEventListener("mousemove", showSidebar, { passive: true });
+    function showCifraFab() {
+      const fab = document.getElementById("btn-cifra");
+      if (!fab) return;
+      fab.classList.add("is-visible");
+      scheduleCifraFabHide();
+    }
+
+    function scheduleCifraFabHide() {
+      clearTimeout(cifraFabHideTimer);
+      cifraFabHideTimer = setTimeout(() => {
+        const fab = document.getElementById("btn-cifra");
+        if (!fab || fab.matches(":hover")) return;
+        fab.classList.remove("is-visible");
+      }, SIDEBAR_IDLE_MS);
+    }
+
+    function onPointerActivity() {
+      showSidebar();
+      showCifraFab();
+    }
+
+    document.addEventListener("mousemove", onPointerActivity, { passive: true });
     els.sidebar.addEventListener("mouseenter", () => clearTimeout(sidebarHideTimer));
     els.sidebar.addEventListener("mouseleave", scheduleSidebarHide);
     els.sidebarPeek.addEventListener("mouseenter", showSidebar);
     scheduleSidebarHide();
+
+    const cifraFab = document.getElementById("btn-cifra");
+    if (cifraFab) {
+      cifraFab.addEventListener("mouseenter", () => clearTimeout(cifraFabHideTimer));
+      cifraFab.addEventListener("mouseleave", scheduleCifraFabHide);
+      scheduleCifraFabHide();
+    }
 
     fetch("manifest.json")
       .then((r) => { if (!r.ok) throw new Error(); return r.json(); })
@@ -1199,6 +1530,13 @@
       .catch(() => {
         els.trackList.innerHTML = "<li style='padding:1rem;color:var(--muted)'>Erro ao carregar manifest.json</li>";
       });
+  </script>
+  <script>
+    CifraOverlay.init();
+    if (window.__stefanoCifraTrack) {
+      CifraOverlay.loadForTrack(window.__stefanoCifraTrack);
+      delete window.__stefanoCifraTrack;
+    }
   </script>
 </body>
 </html>
