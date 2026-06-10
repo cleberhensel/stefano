@@ -27,11 +27,11 @@ Pipeline: `./processar-fila-stefano.sh [NUM] [NUM2]`
 | 19 | ✅ feito | Samba e Amor | https://www.youtube.com/watch?v=fauIobjSIbs |
 | 20 | ✅ feito | Tatuagem | https://www.youtube.com/watch?v=bu-n2iCtYn8 |
 | 21 | ✅ feito | A História de Lilly Braun | https://www.youtube.com/watch?v=OXxMVJL2ZaQ |
-| 22 | ⏳ pendente | Folhetim | https://www.youtube.com/watch?v=7lp7Pp4b-mE |
-| 23 | ⏳ pendente | O Mundo é um moinho | https://www.youtube.com/watch?v=AOc0i-Nih7Y |
-| 24 | ⏳ pendente | Naquela mesa | https://www.youtube.com/watch?v=VLq4eFuAAjA |
-| 25 | ⏳ pendente | Carinhoso | https://www.youtube.com/watch?v=59rhQlNhqy8 |
-| 26 | ⏳ pendente | Disritmia | https://www.youtube.com/watch?v=Wokf65PcvpQ |
+| 22 | ✅ feito | Folhetim | https://www.youtube.com/watch?v=7lp7Pp4b-mE |
+| 23 | ✅ feito | O Mundo é um moinho | https://www.youtube.com/watch?v=AOc0i-Nih7Y |
+| 24 | ✅ feito | Naquela mesa | https://www.youtube.com/watch?v=VLq4eFuAAjA |
+| 25 | ✅ feito | Carinhoso | https://www.youtube.com/watch?v=59rhQlNhqy8 |
+| 26 | ✅ feito | Disritmia | https://www.youtube.com/watch?v=Wokf65PcvpQ |
 
 ## Saída esperada (cada música)
 

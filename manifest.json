@@ -244,7 +244,10 @@
       "folder": "22 Folhetim",
       "youtube_id": "7lp7Pp4b-mE",
       "youtube_url": "https://www.youtube.com/watch?v=7lp7Pp4b-mE",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "22 Folhetim/vocals.mp3",
+      "guitar": "22 Folhetim/guitar.mp3",
+      "duration_sec": 170.13
     },
     {
       "num": 23,
@@ -252,7 +255,10 @@
       "folder": "23 O Mundo e um moinho",
       "youtube_id": "AOc0i-Nih7Y",
       "youtube_url": "https://www.youtube.com/watch?v=AOc0i-Nih7Y",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "23 O Mundo e um moinho/vocals.mp3",
+      "guitar": "23 O Mundo e um moinho/guitar.mp3",
+      "duration_sec": 207.55
     },
     {
       "num": 24,
@@ -260,7 +266,10 @@
       "folder": "24 Naquela mesa",
       "youtube_id": "VLq4eFuAAjA",
       "youtube_url": "https://www.youtube.com/watch?v=VLq4eFuAAjA",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "24 Naquela mesa/vocals.mp3",
+      "guitar": "24 Naquela mesa/guitar.mp3",
+      "duration_sec": 175.06
     },
     {
       "num": 25,
@@ -268,7 +277,10 @@
       "folder": "25 Carinhoso",
       "youtube_id": "59rhQlNhqy8",
       "youtube_url": "https://www.youtube.com/watch?v=59rhQlNhqy8",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "25 Carinhoso/vocals.mp3",
+      "guitar": "25 Carinhoso/guitar.mp3",
+      "duration_sec": 201.58
     },
     {
       "num": 26,
@@ -276,7 +288,10 @@
       "folder": "26 Disritmia",
       "youtube_id": "Wokf65PcvpQ",
       "youtube_url": "https://www.youtube.com/watch?v=Wokf65PcvpQ",
-      "offset_sec": 0
+      "offset_sec": 0,
+      "vocals": "26 Disritmia/vocals.mp3",
+      "guitar": "26 Disritmia/guitar.mp3",
+      "duration_sec": 143.53
     }
   ]
 }

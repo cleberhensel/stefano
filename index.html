@@ -605,17 +605,39 @@
     function isStemMuted(el) { return Boolean(el._userMuted); }
 
     function applyStemOutput(el, muted) {
+      const level = muted ? 0 : 1;
+      // Nunca el.muted=true: MediaElementSource fica preso em silêncio.
       el.muted = false;
-      el.volume = muted ? 0 : 1;
       if (el._gain && audioCtx) {
-        el._gain.gain.cancelScheduledValues(audioCtx.currentTime);
-        el._gain.gain.setValueAtTime(muted ? 0 : 1, audioCtx.currentTime);
+        el.volume = 1;
+        const gainParam = el._gain.gain;
+        gainParam.cancelScheduledValues(audioCtx.currentTime);
+        gainParam.setValueAtTime(level, audioCtx.currentTime);
+      } else {
+        el.volume = level;
       }
+    }
+
+    function syncStemOutputs() {
+      applyStemOutput(vocalsEl, isStemMuted(vocalsEl));
+      applyStemOutput(guitarEl, isStemMuted(guitarEl));
     }
 
     function setStemMuted(el, muted) {
       el._userMuted = muted;
       applyStemOutput(el, muted);
+      updateMuteButtons();
+      if (!muted && audioCtx?.state === "suspended") {
+        audioCtx.resume().catch(() => {});
+      }
+    }
+
+    function armStemLoadSync() {
+      const onReady = () => syncStemOutputs();
+      vocalsEl.addEventListener("loadeddata", onReady, { once: true });
+      guitarEl.addEventListener("loadeddata", onReady, { once: true });
+      vocalsEl.addEventListener("canplay", onReady, { once: true });
+      guitarEl.addEventListener("canplay", onReady, { once: true });
     }
 
     function updateMuteButtons() {
@@ -626,9 +648,21 @@
     }
 
     async function ensureAudioGraph() {
-      if (audioCtx) return;
+      if (audioCtx) {
+        syncStemOutputs();
+        return;
+      }
+      if (!vocalsEl.src || !guitarEl.src) return;
+
+      await Promise.all([
+        waitAudioReady(vocalsEl, PREPARE_TIMEOUT_MS, prepareGen),
+        waitAudioReady(guitarEl, PREPARE_TIMEOUT_MS, prepareGen),
+      ]);
+
       vocalsEl.muted = false;
       guitarEl.muted = false;
+      vocalsEl.volume = 1;
+      guitarEl.volume = 1;
       audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const vGain = audioCtx.createGain();
       const gGain = audioCtx.createGain();
@@ -636,8 +670,7 @@
       audioCtx.createMediaElementSource(guitarEl).connect(gGain).connect(audioCtx.destination);
       vocalsEl._gain = vGain;
       guitarEl._gain = gGain;
-      applyStemOutput(vocalsEl, isStemMuted(vocalsEl));
-      applyStemOutput(guitarEl, isStemMuted(guitarEl));
+      syncStemOutputs();
     }
 
     function setPlayIcon(playing) {
@@ -892,8 +925,7 @@
 
       const hasStems = trackHasStems(track);
       if (hasStems) {
-        vocalsEl.src = enc(track.vocals);
-        guitarEl.src = enc(track.guitar);
+        armStemLoadSync();
       } else {
         vocalsEl.removeAttribute("src");
         guitarEl.removeAttribute("src");
@@ -928,22 +960,24 @@
         return;
       }
 
-      let loaded = 0;
+      let metaCount = 0;
       const onMeta = () => {
-        loaded++;
+        metaCount++;
         duration = Math.max(vocalsEl.duration || 0, guitarEl.duration || 0);
         els.timeTotal.textContent = formatTime(duration);
         const durEl = els.trackList.querySelector(`[data-idx="${index}"] .dur`);
         if (durEl) durEl.textContent = formatTime(duration);
-        if (loaded >= 2 && autoplay) play();
+        syncStemOutputs();
+        if (metaCount >= 2 && autoplay) play();
       };
-      vocalsEl.onloadedmetadata = onMeta;
-      guitarEl.onloadedmetadata = onMeta;
-      vocalsEl.load();
-      guitarEl.load();
+      vocalsEl.addEventListener("loadedmetadata", onMeta, { once: true });
+      guitarEl.addEventListener("loadedmetadata", onMeta, { once: true });
+      vocalsEl.src = enc(track.vocals);
+      guitarEl.src = enc(track.guitar);
     }
 
     async function play() {
+      if (isPreparing) return;
       if (!trackHasStems(currentTrack())) {
         els.syncHint.textContent = "Stems em processamento";
         els.syncHint.className = "sync-hint warn";
@@ -955,25 +989,45 @@
         return;
       }
 
-      await ensureAudioGraph();
-      if (audioCtx.state === "suspended") await audioCtx.resume();
-
-      const t = audioMasterTime();
-      guitarEl.currentTime = t;
-
-      if (ytPlayer && ytReady) {
-        ytPlayer.mute();
-        ytSeekTo(ytTargetTime(t), true);
-        ytPlayer.playVideo();
-      }
-
+      const gen = prepareGen;
+      setPreparing(true, gen);
       try {
-        await Promise.all([vocalsEl.play(), guitarEl.play()]);
+        await preparePlayback(gen);
+        if (isPrepareCancelled(gen)) return;
+
+        await ensureAudioGraph();
+        if (audioCtx?.state === "suspended") await audioCtx.resume();
+        syncStemOutputs();
+
+        const t = audioMasterTime();
+        seekAll(t);
+
+        if (ytPlayer && ytReady) {
+          ytPlayer.mute();
+          ytSeekTo(ytTargetTime(t), true);
+          ytPlayer.playVideo();
+        }
+
+        try {
+          await Promise.all([vocalsEl.play(), guitarEl.play()]);
+          syncStemOutputs();
+        } catch (_) {
+          els.syncHint.textContent = "Toque em Play (gesto do browser)";
+          els.syncHint.className = "sync-hint warn";
+          return;
+        }
         setPlayIcon(true);
         if (!rafId) syncLoop();
-      } catch (_) {
-        els.syncHint.textContent = "Toque em Play (gesto do browser)";
+      } catch (err) {
+        if (err.message === "cancelled") return;
+        if (err.message === "stems missing") {
+          els.syncHint.textContent = "Stems indisponíveis";
+        } else {
+          els.syncHint.textContent = "Falha ao preparar";
+        }
         els.syncHint.className = "sync-hint warn";
+      } finally {
+        setPreparing(false, gen);
       }
     }
 
@@ -1092,12 +1146,13 @@
     });
     els.muteVocals.addEventListener("click", () => {
       setStemMuted(vocalsEl, !isStemMuted(vocalsEl));
-      updateMuteButtons();
     });
     els.muteGuitar.addEventListener("click", () => {
       setStemMuted(guitarEl, !isStemMuted(guitarEl));
-      updateMuteButtons();
     });
+
+    vocalsEl.addEventListener("playing", () => applyStemOutput(vocalsEl, isStemMuted(vocalsEl)));
+    guitarEl.addEventListener("playing", () => applyStemOutput(guitarEl, isStemMuted(guitarEl)));
 
     vocalsEl.addEventListener("timeupdate", () => {
       if (scrubbing) return;
