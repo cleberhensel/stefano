@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stefano — Vídeo + Stems</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0b0908;
+      --glass: rgba(14, 10, 9, 0.82);
+      --border: rgba(232, 160, 144, 0.18);
+      --text: #f5ebe6;
+      --muted: rgba(245, 235, 230, 0.55);
+      --vocals: #e8a090;
+      --guitar: #c9b896;
+      --player-h: 120px;
+    }
+    html, body { height: 100%; }
+    body {
+      font-family: "Outfit", system-ui, sans-serif;
+      color: var(--text);
+      background: var(--ink);
+      overflow: hidden;
+    }
+    .yt-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      background: #000;
+    }
+    .yt-bg #yt-player-host,
+    .yt-bg iframe {
+      position: absolute !important;
+      top: 50% !important;
+      left: 50% !important;
+      width: 100vw !important;
+      height: 56.25vw !important;
+      min-height: 100vh !important;
+      min-width: 177.78vh !important;
+      transform: translate(-50%, -50%) !important;
+      border: 0;
+      pointer-events: none;
+    }
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, transparent 35%, rgba(0,0,0,.45) 100%);
+      pointer-events: none;
+    }
+    .app {
+      position: relative;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: minmax(260px, 320px) 1fr;
+      height: calc(100vh - var(--player-h));
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem;
+      gap: 1rem;
+      pointer-events: none;
+    }
+    .app > * { pointer-events: auto; }
+    .panel {
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .panel-head {
+      padding: .85rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .panel-head h1 { font-size: 1.1rem; font-weight: 500; }
+    .panel-head p { font-size: .75rem; color: var(--muted); margin-top: .2rem; }
+    .track-list {
+      list-style: none;
+      overflow-y: auto;
+      flex: 1;
+      padding: .4rem;
+    }
+    .track-list li {
+      display: grid;
+      grid-template-columns: 24px 1fr auto;
+      gap: .5rem;
+      padding: .45rem .55rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: .82rem;
+    }
+    .track-list li:hover { background: rgba(255,255,255,.06); }
+    .track-list li.active {
+      background: rgba(232,160,144,.14);
+      border: 1px solid var(--border);
+    }
+    .track-list li.active .title { color: var(--vocals); }
+    .track-list .num { color: var(--muted); text-align: center; }
+    .track-list .dur { color: var(--muted); font-size: .7rem; }
+    .main-stage {
+      position: relative;
+      min-height: 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .main-info {
+      padding: 1.25rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: .75rem;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.82) 100%);
+    }
+    .main-info h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      text-shadow: 0 1px 12px rgba(0,0,0,.85);
+    }
+    .main-info p {
+      color: rgba(245, 235, 230, 0.75);
+      font-size: .8rem;
+      text-shadow: 0 1px 8px rgba(0,0,0,.85);
+    }
+    .stems-row {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+    .stem-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .35rem .75rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      font: inherit;
+      font-size: .78rem;
+      cursor: pointer;
+    }
+    .stem-btn.vocals:not(.muted) { color: var(--vocals); border-color: rgba(232,160,144,.35); }
+    .stem-btn.guitar:not(.muted) { color: var(--guitar); border-color: rgba(201,184,150,.35); }
+    .stem-btn.muted { opacity: .45; text-decoration: line-through; }
+    .player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: var(--player-h);
+      z-index: 20;
+      background: rgba(8, 6, 5, 0.92);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 1.25rem;
+      gap: 1rem;
+    }
+    .controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .45rem;
+      width: min(560px, 100%);
+    }
+    .ctrl-btns {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+    }
+    .btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: .2rem;
+      display: flex;
+    }
+    .btn svg { width: 20px; height: 20px; fill: currentColor; }
+    .btn-play {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--vocals);
+      color: var(--ink);
+    }
+    .btn-play svg { width: 22px; height: 22px; }
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      width: 100%;
+    }
+    .time { font-size: .68rem; color: var(--muted); min-width: 36px; font-variant-numeric: tabular-nums; }
+    .progress-bar {
+      flex: 1;
+      height: 4px;
+      background: rgba(255,255,255,.12);
+      border-radius: 2px;
+      cursor: pointer;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--vocals);
+      border-radius: 2px;
+    }
+    .sync-hint {
+      font-size: .65rem;
+      color: var(--muted);
+    }
+    .sync-hint.ok { color: #8fd4a0; }
+    .sync-hint.warn { color: #e8a090; }
+    @media (max-width: 720px) {
+      .app { grid-template-columns: 1fr; height: auto; max-height: calc(100vh - var(--player-h)); }
+      .main-stage { min-height: 38vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="yt-bg" aria-hidden="true"><div id="yt-player-host"></div></div>
+  <div class="overlay" aria-hidden="true"></div>
+
+  <div class="app">
+    <aside class="panel">
+      <div class="panel-head">
+        <h1 id="album-title">Stefano</h1>
+        <p id="album-artists">Repertório — vídeo + stems</p>
+      </div>
+      <ul class="track-list" id="track-list">
+        <li class="loading" style="padding:1rem;color:var(--muted)">A carregar…</li>
+      </ul>
+    </aside>
+    <div class="main-stage">
+      <div class="main-info">
+        <div>
+          <h2 id="track-title">Selecione uma faixa</h2>
+          <p id="track-sub">Vídeo YouTube (mudo) + voz e violão locais</p>
+        </div>
+        <div class="stems-row">
+          <button type="button" class="stem-btn vocals" id="mute-vocals" aria-pressed="false">Voz</button>
+          <button type="button" class="stem-btn guitar" id="mute-guitar" aria-pressed="false">Violão</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="player">
+    <div class="controls">
+      <div class="ctrl-btns">
+        <button class="btn" id="btn-prev" type="button" aria-label="Anterior">
+          <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+        </button>
+        <button class="btn btn-play" id="btn-play" type="button" aria-label="Play">
+          <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <button class="btn" id="btn-next" type="button" aria-label="Próxima">
+          <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+        </button>
+      </div>
+      <div class="progress-wrap">
+        <span class="time" id="time-current">0:00</span>
+        <div class="progress-bar" id="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        <span class="time" id="time-total">0:00</span>
+      </div>
+      <span class="sync-hint" id="sync-hint">Sync: —</span>
+    </div>
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    const SYNC_THRESHOLD = 0.04;
+    const YT_DRIFT_THRESHOLD = 0.12;
+
+    let manifest = null;
+    let currentIndex = -1;
+    let duration = 0;
+    let offsetSec = 0;
+    let rafId = null;
+
+    let ytPlayer = null;
+    let ytReady = false;
+    let ytApiReady = false;
+
+    const vocalsEl = new Audio();
+    const guitarEl = new Audio();
+    vocalsEl.preload = "auto";
+    guitarEl.preload = "auto";
+    vocalsEl._userMuted = false;
+    guitarEl._userMuted = false;
+
+    let audioCtx = null;
+
+    const els = {
+      trackList: document.getElementById("track-list"),
+      trackTitle: document.getElementById("track-title"),
+      trackSub: document.getElementById("track-sub"),
+      albumTitle: document.getElementById("album-title"),
+      albumArtists: document.getElementById("album-artists"),
+      muteVocals: document.getElementById("mute-vocals"),
+      muteGuitar: document.getElementById("mute-guitar"),
+      btnPlay: document.getElementById("btn-play"),
+      btnPrev: document.getElementById("btn-prev"),
+      btnNext: document.getElementById("btn-next"),
+      iconPlay: document.getElementById("icon-play"),
+      iconPause: document.getElementById("icon-pause"),
+      progressBar: document.getElementById("progress-bar"),
+      progressFill: document.getElementById("progress-fill"),
+      timeCurrent: document.getElementById("time-current"),
+      timeTotal: document.getElementById("time-total"),
+      syncHint: document.getElementById("sync-hint"),
+    };
+
+    function onYouTubeIframeAPIReady() {
+      ytApiReady = true;
+      if (currentIndex >= 0) initYtPlayer(manifest.tracks[currentIndex].youtube_id);
+    }
+    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+
+    function formatTime(s) {
+      if (!s || !isFinite(s)) return "0:00";
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return m + ":" + String(sec).padStart(2, "0");
+    }
+
+    function enc(path) {
+      return path.split("/").map(encodeURIComponent).join("/");
+    }
+
+    function isStemMuted(el) { return Boolean(el._userMuted); }
+
+    function applyStemOutput(el, muted) {
+      el.muted = false;
+      el.volume = muted ? 0 : 1;
+      if (el._gain && audioCtx) {
+        el._gain.gain.cancelScheduledValues(audioCtx.currentTime);
+        el._gain.gain.setValueAtTime(muted ? 0 : 1, audioCtx.currentTime);
+      }
+    }
+
+    function setStemMuted(el, muted) {
+      el._userMuted = muted;
+      applyStemOutput(el, muted);
+    }
+
+    function updateMuteButtons() {
+      els.muteVocals.classList.toggle("muted", isStemMuted(vocalsEl));
+      els.muteGuitar.classList.toggle("muted", isStemMuted(guitarEl));
+      els.muteVocals.setAttribute("aria-pressed", String(isStemMuted(vocalsEl)));
+      els.muteGuitar.setAttribute("aria-pressed", String(isStemMuted(guitarEl)));
+    }
+
+    async function ensureAudioGraph() {
+      if (audioCtx) return;
+      vocalsEl.muted = false;
+      guitarEl.muted = false;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const vGain = audioCtx.createGain();
+      const gGain = audioCtx.createGain();
+      audioCtx.createMediaElementSource(vocalsEl).connect(vGain).connect(audioCtx.destination);
+      audioCtx.createMediaElementSource(guitarEl).connect(gGain).connect(audioCtx.destination);
+      vocalsEl._gain = vGain;
+      guitarEl._gain = gGain;
+      applyStemOutput(vocalsEl, isStemMuted(vocalsEl));
+      applyStemOutput(guitarEl, isStemMuted(guitarEl));
+    }
+
+    function setPlayIcon(playing) {
+      els.iconPlay.style.display = playing ? "none" : "block";
+      els.iconPause.style.display = playing ? "block" : "none";
+    }
+
+    function audioMasterTime() {
+      return vocalsEl.currentTime || 0;
+    }
+
+    function ytTargetTime(audioT) {
+      return Math.max(0, offsetSec + audioT);
+    }
+
+    function initYtPlayer(videoId) {
+      if (!ytApiReady) return;
+      if (ytPlayer) {
+        ytPlayer.loadVideoById({ videoId, startSeconds: offsetSec });
+        ytPlayer.mute();
+        return;
+      }
+      ytPlayer = new YT.Player("yt-player-host", {
+        width: "100%",
+        height: "100%",
+        videoId,
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          iv_load_policy: 3,
+          modestbranding: 1,
+          playsinline: 1,
+          rel: 0,
+          start: offsetSec,
+        },
+        events: {
+          onReady: () => {
+            ytReady = true;
+            ytPlayer.mute();
+          },
+        },
+      });
+    }
+
+    function seekAll(audioT) {
+      vocalsEl.currentTime = audioT;
+      guitarEl.currentTime = audioT;
+      if (ytPlayer && ytReady) {
+        ytPlayer.seekTo(ytTargetTime(audioT), true);
+      }
+    }
+
+    function syncLoop() {
+      syncStems();
+      syncYoutube();
+      rafId = requestAnimationFrame(syncLoop);
+    }
+
+    function syncStems() {
+      const drift = Math.abs(vocalsEl.currentTime - guitarEl.currentTime);
+      if (drift > SYNC_THRESHOLD) {
+        guitarEl.currentTime = vocalsEl.currentTime;
+      }
+    }
+
+    function syncYoutube() {
+      if (!ytPlayer || !ytReady || vocalsEl.paused) return;
+      const target = ytTargetTime(audioMasterTime());
+      let ytTime = 0;
+      try { ytTime = ytPlayer.getCurrentTime(); } catch (_) { return; }
+      const drift = Math.abs(ytTime - target);
+      els.syncHint.textContent = "Sync YT: " + (drift * 1000 | 0) + " ms";
+      els.syncHint.className = "sync-hint " + (drift < YT_DRIFT_THRESHOLD ? "ok" : "warn");
+      if (drift > YT_DRIFT_THRESHOLD) {
+        ytPlayer.seekTo(target, true);
+      }
+    }
+
+    function loadTrack(index, autoplay = false) {
+      if (!manifest || index < 0 || index >= manifest.tracks.length) return;
+      const track = manifest.tracks[index];
+      currentIndex = index;
+      offsetSec = track.offset_sec || 0;
+
+      vocalsEl.pause();
+      guitarEl.pause();
+      if (ytPlayer && ytReady) ytPlayer.pauseVideo();
+
+      vocalsEl.src = enc(track.vocals);
+      guitarEl.src = enc(track.guitar);
+
+      els.trackTitle.textContent = track.num + ". " + track.title;
+      els.trackSub.textContent = "YouTube (mudo) + stems locais";
+      initYtPlayer(track.youtube_id);
+
+      els.trackList.querySelectorAll("li").forEach((li, i) => {
+        li.classList.toggle("active", i === index);
+      });
+
+      let loaded = 0;
+      const onMeta = () => {
+        loaded++;
+        duration = Math.max(vocalsEl.duration || 0, guitarEl.duration || 0);
+        els.timeTotal.textContent = formatTime(duration);
+        const durEl = els.trackList.querySelector(`[data-idx="${index}"] .dur`);
+        if (durEl) durEl.textContent = formatTime(duration);
+        if (loaded >= 2 && autoplay) play();
+      };
+      vocalsEl.onloadedmetadata = onMeta;
+      guitarEl.onloadedmetadata = onMeta;
+      vocalsEl.load();
+      guitarEl.load();
+    }
+
+    async function play() {
+      if (currentIndex < 0 && manifest?.tracks.length) {
+        loadTrack(0, true);
+        return;
+      }
+      await ensureAudioGraph();
+      if (audioCtx.state === "suspended") await audioCtx.resume();
+
+      const t = audioMasterTime();
+      guitarEl.currentTime = t;
+      if (ytPlayer && ytReady) {
+        ytPlayer.seekTo(ytTargetTime(t), true);
+        ytPlayer.mute();
+        ytPlayer.playVideo();
+      }
+
+      try {
+        await Promise.all([vocalsEl.play(), guitarEl.play()]);
+        setPlayIcon(true);
+        if (!rafId) syncLoop();
+      } catch (_) {
+        els.syncHint.textContent = "Toque em Play (gesto do browser)";
+      }
+    }
+
+    function pause() {
+      vocalsEl.pause();
+      guitarEl.pause();
+      if (ytPlayer && ytReady) ytPlayer.pauseVideo();
+      setPlayIcon(false);
+    }
+
+    function seekTo(ratio) {
+      if (!duration) return;
+      seekAll(ratio * duration);
+    }
+
+    function renderPlaylist() {
+      els.trackList.innerHTML = manifest.tracks.map((track, i) => {
+        const dur = track.duration_sec ? formatTime(track.duration_sec) : "—";
+        const ready = track.vocals && track.guitar;
+        return `<li data-idx="${i}"${ready ? "" : ' style="opacity:.45"'}>
+          <span class="num">${track.num}</span>
+          <span class="title">${track.title}</span>
+          <span class="dur">${dur}</span>
+        </li>`;
+      }).join("");
+      els.trackList.querySelectorAll("li").forEach((li) => {
+        li.addEventListener("click", () => {
+          const idx = Number(li.dataset.idx);
+          if (idx === currentIndex && !vocalsEl.paused) pause();
+          else loadTrack(idx, true);
+        });
+      });
+    }
+
+    els.btnPlay.addEventListener("click", () => {
+      if (vocalsEl.paused) play();
+      else pause();
+    });
+    els.btnPrev.addEventListener("click", () => {
+      if (vocalsEl.currentTime > 3) seekAll(0);
+      else if (currentIndex > 0) loadTrack(currentIndex - 1, true);
+    });
+    els.btnNext.addEventListener("click", () => {
+      if (currentIndex < manifest.tracks.length - 1) loadTrack(currentIndex + 1, true);
+    });
+    els.progressBar.addEventListener("click", (e) => {
+      const rect = els.progressBar.getBoundingClientRect();
+      seekTo((e.clientX - rect.left) / rect.width);
+    });
+    els.muteVocals.addEventListener("click", () => {
+      setStemMuted(vocalsEl, !isStemMuted(vocalsEl));
+      updateMuteButtons();
+    });
+    els.muteGuitar.addEventListener("click", () => {
+      setStemMuted(guitarEl, !isStemMuted(guitarEl));
+      updateMuteButtons();
+    });
+
+    vocalsEl.addEventListener("timeupdate", () => {
+      els.timeCurrent.textContent = formatTime(vocalsEl.currentTime);
+      const pct = duration ? (vocalsEl.currentTime / duration) * 100 : 0;
+      els.progressFill.style.width = pct + "%";
+    });
+    vocalsEl.addEventListener("ended", () => {
+      if (currentIndex < manifest.tracks.length - 1) loadTrack(currentIndex + 1, true);
+      else { pause(); setPlayIcon(false); }
+    });
+
+    fetch("manifest.json")
+      .then((r) => { if (!r.ok) throw new Error(); return r.json(); })
+      .then((data) => {
+        manifest = data;
+        els.albumTitle.textContent = data.album || "Stefano";
+        els.albumArtists.textContent = data.artists || "";
+        renderPlaylist();
+        updateMuteButtons();
+        if (data.tracks.length) loadTrack(0, false);
+      })
+      .catch(() => {
+        els.trackList.innerHTML = "<li style='padding:1rem;color:var(--muted)'>Erro ao carregar manifest.json</li>";
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+{
+  "album": "Stefano — repertório",
+  "artists": "Stefano Benni / MPB",
+  "player": {
+    "mode": "youtube-video-stems",
+    "sync_master": "audio",
+    "youtube_muted": true
+  },
+  "tracks": [
+    {
+      "num": 1,
+      "title": "O que será / Flor da pele",
+      "folder": "01 O que sera",
+      "youtube_id": "_szSyzZVV4c",
+      "youtube_url": "https://www.youtube.com/watch?v=_szSyzZVV4c",
+      "vocals": "01 O que sera/vocals.mp3",
+      "guitar": "01 O que sera/guitar.mp3",
+      "offset_sec": 0,
+      "duration_sec": 166.0
+    },
+    {
+      "num": 2,
+      "title": "Roda Viva",
+      "folder": "02 Roda Viva",
+      "youtube_id": "fupIYBj-0lE",
+      "youtube_url": "https://www.youtube.com/watch?v=fupIYBj-0lE",
+      "offset_sec": 0
+    },
+    {
+      "num": 3,
+      "title": "Gente Humilde",
+      "folder": "03 Gente Humilde",
+      "youtube_id": "KZcSLK7Ya0s",
+      "youtube_url": "https://www.youtube.com/watch?v=KZcSLK7Ya0s",
+      "offset_sec": 0
+    },
+    {
+      "num": 4,
+      "title": "O bêbado e o equilibrista",
+      "folder": "04 O bebado e o equilibrista",
+      "youtube_id": "xK8Bp_aOOhc",
+      "youtube_url": "https://www.youtube.com/watch?v=xK8Bp_aOOhc",
+      "offset_sec": 0
+    },
+    {
+      "num": 5,
+      "title": "É preciso dar um jeito, meu amigo",
+      "folder": "05 E preciso dar um jeito meu amigo",
+      "youtube_id": "fKt-XwAbAUc",
+      "youtube_url": "https://www.youtube.com/watch?v=fKt-XwAbAUc",
+      "offset_sec": 0
+    },
+    {
+      "num": 6,
+      "title": "Apesar de você",
+      "folder": "06 Apesar de voce",
+      "youtube_id": "iR1zWZc19yA",
+      "youtube_url": "https://www.youtube.com/watch?v=iR1zWZc19yA",
+      "offset_sec": 0
+    },
+    {
+      "num": 7,
+      "title": "Cotidiano",
+      "folder": "07 Cotidiano",
+      "youtube_id": "_ySl6SAZIe4",
+      "youtube_url": "https://www.youtube.com/watch?v=_ySl6SAZIe4",
+      "offset_sec": 0
+    },
+    {
+      "num": 8,
+      "title": "Construção",
+      "folder": "08 Construcao",
+      "youtube_id": "4P-ZutZEeZA",
+      "youtube_url": "https://www.youtube.com/watch?v=4P-ZutZEeZA",
+      "offset_sec": 0
+    },
+    {
+      "num": 9,
+      "title": "Essa moça tá diferente",
+      "folder": "09 Essa moca ta diferente",
+      "youtube_id": "XEEB1U2inqc",
+      "youtube_url": "https://www.youtube.com/watch?v=XEEB1U2inqc",
+      "offset_sec": 0
+    },
+    {
+      "num": 10,
+      "title": "Trocando em miúdos",
+      "folder": "10 Trocando em miudos",
+      "youtube_id": "6XSlQTqcoaY",
+      "youtube_url": "https://www.youtube.com/watch?v=6XSlQTqcoaY",
+      "offset_sec": 0
+    },
+    {
+      "num": 11,
+      "title": "João e Maria",
+      "folder": "11 Joao e Maria",
+      "youtube_id": "1jJItSUErFs",
+      "youtube_url": "https://www.youtube.com/watch?v=1jJItSUErFs",
+      "offset_sec": 0
+    },
+    {
+      "num": 12,
+      "title": "Azul",
+      "folder": "12 Azul",
+      "youtube_id": "3Y5KhHQETl8",
+      "youtube_url": "https://www.youtube.com/watch?v=3Y5KhHQETl8",
+      "offset_sec": 0
+    },
+    {
+      "num": 13,
+      "title": "Eu te amo",
+      "folder": "13 Eu te amo",
+      "youtube_id": "6yakscP9sgE",
+      "youtube_url": "https://www.youtube.com/watch?v=6yakscP9sgE",
+      "offset_sec": 0
+    },
+    {
+      "num": 14,
+      "title": "Todo o Sentimento",
+      "folder": "14 Todo o Sentimento",
+      "youtube_id": "AsE-RfBQ0eo",
+      "youtube_url": "https://www.youtube.com/watch?v=AsE-RfBQ0eo",
+      "offset_sec": 0
+    },
+    {
+      "num": 15,
+      "title": "Cálice",
+      "folder": "15 Calice",
+      "youtube_id": "nx0Qs-zmIBc",
+      "youtube_url": "https://www.youtube.com/watch?v=nx0Qs-zmIBc",
+      "offset_sec": 0
+    },
+    {
+      "num": 16,
+      "title": "Olhos nos olhos",
+      "folder": "16 Olhos nos olhos",
+      "youtube_id": "kVqvicbGqXQ",
+      "youtube_url": "https://www.youtube.com/watch?v=kVqvicbGqXQ",
+      "offset_sec": 0
+    },
+    {
+      "num": 17,
+      "title": "A Banda",
+      "folder": "17 A Banda",
+      "youtube_id": "rU_xRkhpf60",
+      "youtube_url": "https://www.youtube.com/watch?v=rU_xRkhpf60",
+      "offset_sec": 0
+    },
+    {
+      "num": 18,
+      "title": "Pedaço de Mim",
+      "folder": "18 Pedaco de Mim",
+      "youtube_id": "FZUoR6vAyG8",
+      "youtube_url": "https://www.youtube.com/watch?v=FZUoR6vAyG8",
+      "offset_sec": 0
+    },
+    {
+      "num": 19,
+      "title": "Samba e Amor",
+      "folder": "19 Samba e Amor",
+      "youtube_id": "fauIobjSIbs",
+      "youtube_url": "https://www.youtube.com/watch?v=fauIobjSIbs",
+      "offset_sec": 0
+    },
+    {
+      "num": 20,
+      "title": "Tatuagem",
+      "folder": "20 Tatuagem",
+      "youtube_id": "bu-n2iCtYn8",
+      "youtube_url": "https://www.youtube.com/watch?v=bu-n2iCtYn8",
+      "offset_sec": 0
+    },
+    {
+      "num": 21,
+      "title": "A História de Lilly Braun",
+      "folder": "21 A Historia de Lilly Braun",
+      "youtube_id": "OXxMVJL2ZaQ",
+      "youtube_url": "https://www.youtube.com/watch?v=OXxMVJL2ZaQ",
+      "offset_sec": 0
+    },
+    {
+      "num": 22,
+      "title": "Folhetim",
+      "folder": "22 Folhetim",
+      "youtube_id": "7lp7Pp4b-mE",
+      "youtube_url": "https://www.youtube.com/watch?v=7lp7Pp4b-mE",
+      "offset_sec": 0
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+# Áudio bruto / intermédio (só MP3 de stems no repo)
+*.wav
+*.flac
+*.aiff
+*.webm
+*.m4a
+source.*
+mix.*
+
+# Transcrições e ferramentas locais
+transcricao/
+arranjo/
+*.mid
+*.gp5
+*.tab.txt
+*.alphatex.txt
+
+# Demucs output
+_demucs_out/
+
+# macOS
+.DS_Store
