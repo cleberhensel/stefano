@@ -1,0 +1,234 @@
+# O Que Será — cifra melódica (corrigida)
+# Tom: Dm  |  Alinhada a: 01-o-que-sera.txt (violão Stefano)
+# Notação: dó-fixo (dó=C, ré=D, mi=E, fá=F, sol=G, lá=A, si=B, sib=Bb, dó#=C#, fá#=F#)
+# Convenção: notas repetidas = sustentação / sílabas na mesma altura
+# Referência harmônica entre colchetes
+
+# ─── LEGENDA DOS 4 MOTIVOS DE VERSO ───────────────────────────────────────
+# [A] ré mi fá# mi ré …          → sobre Dm6 / Am (cliché descendente)
+# [B] ré mi fá# mi ré … lá lá lá → sobre Am6 / Gm (fecha na 5ª = lá)
+# [C] dó# ré mi ré dó# … mi mi  → sobre Gm6 / Bbm (arco com 6ª melódica)
+# [D] ré mi fá# mi ré … LÁ LÁ   → sobre cadência A7(b13)→Dm (tensão na 5ª)
+# [E] figura fá#–dó–ré–dó–fá#   → bloco intermediário (Gm / Bbm)
+# [F] lá dó ré dó lá … ré ré    → refrão filosófico (desce à tônica)
+# [G] dó# ré mi ré dó# … ré ré  → tríade negativa (Bbm com cliché)
+# [H] si dó# ré dó# si ré si     → fechamento cadencial (A7→Dm)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# ESTROFE 1 — centro em Dm
+# ═══════════════════════════════════════════════════════════════════════════
+
+[Dm  Dm7M  Dm7]
+lá lá dó ré | fá ré fá ré
+O que será , que será?
+
+[Dm6  Am  Am7M  Am7]                              [motivo A]
+ré mi fá# mi ré | fá# mi ré fá# mi ré lá
+Que andam suspirando pelas alcovas
+
+[Am6  Gm  Gm7M  Gm7]                              [motivo B]
+ré mi fá# mi ré | lá lá lá lá lá lá lá
+Que andam sussurrando em versos e trovas
+
+[Gm6  Bbm  Bbm7M  Em7(5-)]                         [motivo C]
+dó# ré mi ré dó# | mi mi mi mi mi mi mi
+Que andam combinando no breu das tocas
+
+[A7(13-)  Dm  Dm7M  Dm7]                          [motivo D]
+ré mi fá# mi ré | LÁ LÁ LÁ LÁ LÁ LÁ LÁ
+Que anda nas cabeças , anda nas bocas
+
+[Dm6  Am  Am7M  Am7]                              [motivo A]
+ré mi fá# mi ré | fá# mi ré fá# mi ré lá
+Que andam acendendo velas nos becos
+
+[Am6  Gm  Gm7M  Gm7]                              [motivo B]
+ré mi fá# mi ré | lá lá lá lá lá lá lá
+Que estão falando alto pelos botecos
+
+[Gm6  Bbm  Bbm7M  Em7(5-)]                         [motivo C]
+dó# ré mi ré dó# | mi mi mi mi mi mi mi
+E gritam nos mercados que com certeza
+
+[A7(13-)  Dm  Dm7M  Dm7]                          [motivo F]
+lá dó ré dó lá | ré ré ré ré ré ré ré
+Está na natureza , será , que será?
+
+[Dm6  Bbm  Bbm7M  Bbm7]                            [motivo G]
+dó# ré mi ré dó# | ré ré ré ré ré ré ré
+O que não tem certeza , nem nunca terá
+
+[Bbm6  F/A  Abº  Gm7]                             [motivo G]
+dó# ré mi ré dó# | ré ré ré ré ré ré ré
+O que não tem conserto , nem nunca terá
+
+[A7(13-)  Dm  A7(13-)]                            [motivo H]
+si dó# ré dó# si | ré si
+O que não tem tamanho
+
+# ═══════════════════════════════════════════════════════════════════════════
+# ESTROFE 2 — centro em Dm (mesma melodia, nova letra)
+# ═══════════════════════════════════════════════════════════════════════════
+
+[Dm  Dm7M  Dm7]
+lá lá dó ré | fá ré fá ré
+O que será , que será?
+
+[Dm6  Am  Am7M  Am7]                              [motivo A]
+ré mi fá# mi ré | fá# mi ré fá# mi ré lá
+Que vive nas ideias desses amantes
+
+[Am6  Gm  Gm7M  Gm7]                              [motivo B]
+ré mi fá# mi ré | lá lá lá lá lá lá lá
+Que cantam os poetas mais delirantes
+
+[Gm6  Bbm  Bbm7M  Em7(5-)]                         [motivo C]
+dó# ré mi ré dó# | mi mi mi mi mi mi mi
+Que juram os profetas embriagados
+
+[A7(13-)  Dm  Dm7M  Dm7]                          [motivo D]
+ré mi fá# mi ré | LÁ LÁ LÁ LÁ LÁ LÁ LÁ
+Que está na romaria dos mutilados
+
+[Dm6  Am  Am7M  Am7]                              [motivo A]
+ré mi fá# mi ré | fá# mi ré fá# mi ré lá
+Que está na fantasia dos infelizes
+
+[Am6  Gm  Gm7M  Gm7]                              [motivo B]
+ré mi fá# mi ré | lá lá lá lá lá lá lá
+Que está no dia a dia das meretrizes
+
+[Gm6  Bbm  Bbm7M  Em7(5-)]                         [motivo C]
+dó# ré mi ré dó# | mi mi mi mi mi mi mi
+No plano dos bandidos , dos desvalidos
+
+[A7(13-)  Dm  Dm7M  Dm7]                          [motivo F]
+lá dó ré dó lá | ré ré ré ré ré ré ré
+Em todos os sentidos , será , que será?
+
+[Dm6  Bbm  Bbm7M  Bbm7]                            [motivo G]
+dó# ré mi ré dó# | ré ré ré ré ré ré ré
+O que não tem decência , nem nunca terá
+
+[Bbm6  F/A  Abº  Gm7]                             [motivo G]
+dó# ré mi ré dó# | ré ré ré ré ré ré ré
+O que não tem censura , nem nunca terá
+
+[A7(13-)  Dm  D7]                                 [motivo H]
+si dó# ré dó# si | ré si
+O que não faz sentido
+
+# ═══════════════════════════════════════════════════════════════════════════
+# ESTROFE 3 — PONTE (harmonia em Gm; melodia absoluta igual)
+# ═══════════════════════════════════════════════════════════════════════════
+
+[Gm  Gm7M  Gm7]
+lá lá dó ré | fá ré fá ré
+O que será , que será?
+
+[Gm6  Dm  Dm7M  Dm7]                              [motivo A]
+ré mi fá# mi ré | fá# mi ré fá# mi ré lá
+Que todos os avisos não vão evitar
+
+[Abº  Cm  Cm7M  Cm7]                              [motivo B — ouvido sobre Cm]
+ré mi fá# mi ré | lá lá lá lá lá lá lá
+Por que todos os risos vão desafiar
+
+[Cm6  Ebm  Ebm7M  Am7(5-)]                        [motivo C]
+dó# ré mi ré dó# | mi mi mi mi mi mi mi
+Por que todos os sinos irão repicar
+
+[D7(9-)  Gm  Gm7M  Gm7]                           [motivo D]
+ré mi fá# mi ré | LÁ LÁ LÁ LÁ LÁ LÁ LÁ
+Por que todos os hinos irão consagrar
+
+[Gm6  Dm  Dm7M  Dm7]                              [motivo A]
+ré mi fá# mi ré | fá# mi ré fá# mi ré lá
+E todos os meninos vão desembestar
+
+[G7/B  Cm  Cm7M  Cm7]                              [motivo E]
+fá# dó ré dó fá# | dó dó dó dó dó dó dó
+E todos os destinos irão se encontrar
+
+[Cm6  Ebm  Ebm7M  Am7(5-)]                        [motivo E variante]
+mi dó# ré dó# mi | dó dó dó dó dó dó dó
+E mesmo o Padre Eterno que nunca foi lá
+
+[D7(9-)  Gm  Gm7M  Gm7]                           [motivo F]
+lá dó ré dó lá | ré ré ré ré ré ré ré
+Olhando aquele inferno , vai abençoar
+
+[Gm6  Ebm  Ebm7M  Ebm7]                            [motivo G]
+dó# ré mi ré dó# | ré ré ré ré ré ré ré
+O que não tem governo , nem nunca terá
+
+[Ebm6  Bb/D  C#º  Cm7]                            [motivo G]
+dó# ré mi ré dó# | ré ré ré ré ré ré ré
+O que não tem vergonha , nem nunca terá
+
+[D7  Gm  E7]                                      [motivo H]
+si dó# ré dó# si | ré si
+O que não tem juízo
+
+# ═══════════════════════════════════════════════════════════════════════════
+# ESTROFE 4 — retorno a Dm (reprise da ponte com harmonia da estrofe 1)
+# ═══════════════════════════════════════════════════════════════════════════
+
+[Dm  Dm7M  Dm7]
+lá lá dó ré | fá ré fá ré
+O que será , que será?
+
+[Dm6  Am  Am7M  Am7]                              [motivo A]
+ré mi fá# mi ré | fá# mi ré fá# mi ré lá
+Que todos os avisos não vão evitar
+
+[Am6  Gm  Gm7M  Gm7]                              [motivo B]
+ré mi fá# mi ré | lá lá lá lá lá lá lá
+Por que todos os risos vão desafiar
+
+[Gm6  Bbm  Bbm7M  Em7(5-)]                         [motivo C]
+dó# ré mi ré dó# | mi mi mi mi mi mi mi
+Por que todos os sinos irão repicar
+
+[A7(13-)  Dm  Dm7M  Dm7]                          [motivo D]
+ré mi fá# mi ré | LÁ LÁ LÁ LÁ LÁ LÁ LÁ
+Por que todos os hinos irão consagrar
+
+[Dm6  Am  Am7M  Am7]                              [motivo A]
+ré mi fá# mi ré | fá# mi ré fá# mi ré lá
+E todos os meninos vão desembestar
+
+[Am6  Gm  Gm7M  Gm7]                              [motivo E]
+fá# dó ré dó fá# | dó dó dó dó dó dó dó
+E todos os destinos irão se encontrar
+
+[Gm6  Bbm  Bbm7M  Em7(5-)]                         [motivo E variante]
+mi dó# ré dó# mi | dó dó dó dó dó dó dó
+E mesmo o Padre Eterno que nunca foi lá
+
+[A7(13-)  Dm  Dm7M  Dm7]                          [motivo F]
+lá dó ré dó lá | ré ré ré ré ré ré ré
+Olhando aquele inferno , vai abençoar
+
+[Dm6  Bbm  Bbm7M  Bbm7]                            [motivo G]
+dó# ré mi ré dó# | ré ré ré ré ré ré ré
+O que não tem governo , nem nunca terá
+
+[Bbm6  F/A  Abº  Gm7]                             [motivo G]
+dó# ré mi ré dó# | ré ré ré ré ré ré ré
+O que não tem vergonha , nem nunca terá
+
+[A7(13-)  Dm  G7(13)]                             [motivo H]
+si dó# ré dó# si | ré si
+O que não tem juízo
+
+# ─── MAPA RÁPIDO: GRAUS EM Dm ───────────────────────────────────────────────
+# Gancho:        5 – b7 – 1 – b3 – 1 – b3 – 1  (lá dó ré fá ré fá ré)
+# Motivo A:      1 – 2 – 6 – 2 – 1 …           (ré mi fá# mi ré)
+# Motivo B:      idem → fecha em 5             (… lá lá lá)
+# Motivo C:      #4 – 5 – 6 – 5 – #4 …         (dó# ré mi ré dó#)
+# Motivo D:      idem → fecha em 5 forte       (… LÁ LÁ LÁ)
+# Motivo E:      6 – b7 – 1 – b7 – 6 …         (fá# dó ré dó fá#)
+# Motivo F:      5 – b7 – 1 – b7 – 5 → 1      (lá dó ré dó lá → ré)
+# Motivo G:      flutua em 6 / 1               (dó# ré mi ré dó# → ré)
+# Motivo H:      6 – 7 – 1 – 7 – 6 – 1 – 6     (si dó# ré dó# si ré si)

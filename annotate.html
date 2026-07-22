@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stefano — Anotar acordes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0e14;
+      --panel: rgba(12, 18, 26, .92);
+      --border: rgba(255, 255, 255, .12);
+      --text: #f0f4f8;
+      --muted: rgba(240, 248, 252, .55);
+      --guitar: #a8e0bc;
+      --mark: #f0c27a;
+      --player-h: 72px;
+      --anno-w: 340px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Outfit, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .top {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: .65rem 1rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0, 0, 0, .35);
+    }
+    .top a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .78rem;
+    }
+    .top a:hover { color: var(--text); }
+    .top h1 {
+      margin: 0;
+      font-size: .95rem;
+      font-weight: 600;
+      flex: 1;
+    }
+    .top select {
+      font: inherit;
+      background: var(--panel);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .35rem .55rem;
+      max-width: 280px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr var(--anno-w);
+      min-height: calc(100vh - 49px);
+    }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      :root { --anno-w: 100%; }
+    }
+    .stage {
+      position: relative;
+      background: #000;
+      min-height: 50vh;
+    }
+    .yt-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    #yt-host {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .player-bar {
+      position: sticky;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .75rem 1rem;
+      background: rgba(8, 12, 18, .95);
+      border-top: 1px solid var(--border);
+    }
+    .btn {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .06);
+      color: var(--text);
+      border-radius: 8px;
+      padding: .45rem .75rem;
+      font: inherit;
+      cursor: pointer;
+    }
+    .btn:hover { background: rgba(255, 255, 255, .1); }
+    .btn-play {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      padding: 0;
+      font-size: 1rem;
+    }
+    .time { font-size: .78rem; color: var(--muted); min-width: 3.2rem; }
+    .progress {
+      flex: 1;
+      height: 6px;
+      background: rgba(255, 255, 255, .1);
+      border-radius: 99px;
+      cursor: pointer;
+    }
+    .progress__fill {
+      height: 100%;
+      width: 0%;
+      background: var(--guitar);
+      border-radius: 99px;
+    }
+    .anno {
+      border-left: 1px solid var(--border);
+      background: var(--panel);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .anno-kicker {
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .next-chord {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--mark);
+      line-height: 1;
+      text-shadow: 0 0 24px rgba(240, 194, 122, .25);
+    }
+    .next-meta {
+      font-size: .82rem;
+      color: var(--muted);
+    }
+    .mark-btn {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      border: 2px solid var(--mark);
+      background: rgba(240, 194, 122, .12);
+      color: #fff4dc;
+      cursor: pointer;
+      transition: transform .12s ease, background .12s ease;
+    }
+    .mark-btn:hover { background: rgba(240, 194, 122, .22); }
+    .mark-btn:active { transform: scale(.98); }
+    .mark-btn.is-flash {
+      background: rgba(240, 194, 122, .35);
+      box-shadow: 0 0 20px rgba(240, 194, 122, .35);
+    }
+    .keys {
+      font-size: .74rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .keys kbd {
+      display: inline-block;
+      padding: .1rem .35rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: rgba(0, 0, 0, .25);
+      font-family: inherit;
+      font-size: .72rem;
+      color: var(--text);
+    }
+    .marks-list {
+      flex: 1;
+      min-height: 120px;
+      max-height: 240px;
+      overflow: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .35rem;
+      font-size: .78rem;
+    }
+    .marks-list:empty::before {
+      content: "Nenhuma marca ainda — dê play e pressione L nas trocas.";
+      color: var(--muted);
+      display: block;
+      padding: .5rem;
+    }
+    .mark-row {
+      display: flex;
+      justify-content: space-between;
+      gap: .5rem;
+      padding: .28rem .4rem;
+      border-radius: 4px;
+    }
+    .mark-row:nth-child(odd) { background: rgba(255, 255, 255, .04); }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .actions .btn { flex: 1; min-width: 120px; font-size: .78rem; }
+    .status {
+      font-size: .74rem;
+      color: var(--guitar);
+      min-height: 1.2em;
+    }
+    .done-banner {
+      padding: .65rem .75rem;
+      border-radius: 8px;
+      background: rgba(168, 224, 188, .12);
+      border: 1px solid rgba(168, 224, 188, .35);
+      color: var(--guitar);
+      font-size: .82rem;
+    }
+
+    /* —— Editor de acordes —— */
+    .chord-editor {
+      border-top: 1px solid var(--border);
+      background: rgba(6, 10, 16, .98);
+      padding: 1.25rem 1rem 2rem;
+    }
+    .chord-editor__head {
+      display: flex;
+      align-items: baseline;
+      gap: .75rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .chord-editor__head h2 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .chord-editor__head p {
+      margin: 0;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+    .editor-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+    @media (max-width: 1100px) {
+      .editor-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 720px) {
+      .editor-grid { grid-template-columns: 1fr; }
+    }
+    .editor-panel {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--panel);
+      padding: .85rem;
+    }
+    .editor-panel label,
+    .editor-kicker {
+      display: block;
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .45rem;
+    }
+    .editor-cifra-text {
+      width: 100%;
+      min-height: 280px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: .72rem;
+      line-height: 1.45;
+      background: rgba(0, 0, 0, .25);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .55rem .65rem;
+    }
+    .editor-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+      margin-bottom: .65rem;
+    }
+    .editor-chord-name {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--guitar);
+      text-align: center;
+      flex: 1;
+    }
+    .fb-wrap {
+      position: relative;
+      margin: 0 auto .65rem;
+      max-width: 280px;
+    }
+    .fb-base-fret {
+      position: absolute;
+      left: 0;
+      top: 2.1rem;
+      font-size: .68rem;
+      color: var(--muted);
+      width: 1.2rem;
+      text-align: right;
+    }
+    .fb-board {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-left: 1.4rem;
+    }
+    .fb-row {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 4px;
+    }
+    .fb-row-label {
+      display: none;
+    }
+    .fb-cell {
+      aspect-ratio: 1;
+      min-height: 36px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, .04);
+      color: var(--muted);
+      font: inherit;
+      font-size: .72rem;
+      cursor: pointer;
+      padding: 0;
+    }
+    .fb-cell:hover { background: rgba(168, 224, 188, .12); border-color: rgba(168, 224, 188, .35); }
+    .fb-cell.is-active {
+      background: rgba(168, 224, 188, .35);
+      border-color: var(--guitar);
+      box-shadow: inset 0 0 0 1px rgba(168, 224, 188, .5);
+    }
+    .fb-cell--open.is-open { color: var(--guitar); }
+    .fb-cell--open.is-muted { opacity: .7; }
+    .fb-string-labels {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 4px;
+      margin-left: 1.4rem;
+      margin-top: .35rem;
+      font-size: .62rem;
+      color: var(--muted);
+      text-align: center;
+    }
+    .str-inputs {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: .35rem;
+      margin-bottom: .55rem;
+    }
+    .str-inputs input {
+      width: 100%;
+      text-align: center;
+      font: inherit;
+      font-size: .78rem;
+      padding: .28rem 0;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: rgba(0, 0, 0, .25);
+      color: var(--text);
+    }
+    .editor-shape {
+      width: 100%;
+      font-family: ui-monospace, monospace;
+      font-size: .78rem;
+      padding: .35rem .5rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: rgba(0, 0, 0, .25);
+      color: var(--text);
+      margin-bottom: .55rem;
+    }
+    .editor-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+    }
+    .editor-actions .btn { font-size: .74rem; flex: 1; min-width: 110px; }
+    .editor-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      max-height: 320px;
+      overflow: auto;
+    }
+    .chord-pill {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .05);
+      color: var(--text);
+      border-radius: 999px;
+      padding: .22rem .55rem;
+      font: inherit;
+      font-size: .72rem;
+      cursor: pointer;
+    }
+    .chord-pill.is-active {
+      border-color: var(--guitar);
+      background: rgba(168, 224, 188, .18);
+      color: var(--guitar);
+    }
+    .chord-pill.is-edited {
+      border-color: var(--mark);
+    }
+    .chord-pill.is-missing {
+      border-style: dashed;
+      opacity: .75;
+    }
+    .editor-status {
+      font-size: .74rem;
+      color: var(--guitar);
+      min-height: 1.1em;
+      margin-top: .5rem;
+    }
+    .editor-detect {
+      margin-bottom: .75rem;
+      padding: .55rem .65rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(0, 0, 0, .2);
+    }
+    .editor-detect.is-match {
+      border-color: rgba(168, 224, 188, .35);
+    }
+    .editor-detect.is-mismatch {
+      border-color: rgba(240, 194, 122, .55);
+      background: rgba(240, 194, 122, .08);
+    }
+    .editor-detect__label {
+      margin: 0;
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .editor-detect__name {
+      margin: .25rem 0 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--guitar);
+    }
+    .editor-detect.is-mismatch .editor-detect__name {
+      color: var(--mark);
+    }
+    .editor-detect__notes,
+    .editor-detect__alts {
+      margin: .2rem 0 0;
+      font-size: .72rem;
+      color: var(--muted);
+    }
+    .editor-detect__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: .55rem;
+    }
+    .editor-detect__actions .btn {
+      font-size: .72rem;
+      flex: 1;
+      min-width: 130px;
+    }
+    .btn--warn {
+      border-color: rgba(240, 194, 122, .55);
+      color: #fff4dc;
+      background: rgba(240, 194, 122, .14);
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a href="index.html">← Player</a>
+    <h1>Anotar acordes</h1>
+    <select id="track-select" aria-label="Faixa"></select>
+  </header>
+
+  <div class="layout">
+    <div>
+      <div class="stage">
+        <div class="yt-wrap"><div id="yt-host"></div></div>
+      </div>
+      <div class="player-bar">
+        <button type="button" class="btn btn-play" id="btn-play" aria-label="Play">▶</button>
+        <span class="time" id="time-cur">0:00</span>
+        <div class="progress" id="progress"><div class="progress__fill" id="progress-fill"></div></div>
+        <span class="time" id="time-tot">0:00</span>
+        <button type="button" class="btn" id="mute-vocals">Voz</button>
+        <button type="button" class="btn" id="mute-guitar">Violão</button>
+      </div>
+    </div>
+
+    <aside class="anno">
+      <div>
+        <p class="anno-kicker">Próximo acorde da cifra</p>
+        <p class="next-chord" id="next-chord">—</p>
+        <p class="next-meta" id="next-meta">Carregando…</p>
+      </div>
+
+      <button type="button" class="mark-btn" id="btn-mark">Marcar troca · <kbd>L</kbd></button>
+
+      <p class="keys">
+        <kbd>L</kbd> marcar · <kbd>Z</kbd> desfazer · <kbd>S</kbd> pular acorde ·
+        <kbd>Espaço</kbd> play/pause · <kbd>←</kbd><kbd>→</kbd> ±2s
+      </p>
+
+      <div class="marks-list" id="marks-list"></div>
+      <p class="status" id="status"></p>
+      <div class="done-banner" id="done-banner" hidden>Todos os acordes marcados — exporte a timeline.</div>
+
+      <div class="actions">
+        <button type="button" class="btn" id="btn-undo">Desfazer</button>
+        <button type="button" class="btn" id="btn-skip">Pular acorde</button>
+        <button type="button" class="btn" id="btn-clear">Limpar</button>
+        <button type="button" class="btn" id="btn-save">Salvar rascunho</button>
+        <button type="button" class="btn" id="btn-export">Baixar JSON</button>
+        <button type="button" class="btn" id="btn-copy">Copiar JSON</button>
+      </div>
+    </aside>
+  </div>
+
+  <section class="chord-editor" id="chord-editor" aria-label="Editor de acordes">
+    <div class="chord-editor__head">
+      <h2>Editor de acordes</h2>
+      <p>Diagrama interativo · clique nos trastes · <kbd>,</kbd> / <kbd>.</kbd> acorde anterior / próximo</p>
+    </div>
+
+    <div class="editor-grid">
+      <div class="editor-panel">
+        <span class="editor-kicker">Cifra (texto editável)</span>
+        <textarea class="editor-cifra-text" id="editor-cifra-text" spellcheck="false" aria-label="Texto da cifra"></textarea>
+        <div class="editor-actions" style="margin-top:.55rem">
+          <button type="button" class="btn" id="editor-save-cifra">Salvar cifra</button>
+          <button type="button" class="btn" id="editor-dl-cifra">Baixar .txt</button>
+        </div>
+      </div>
+
+      <div class="editor-panel">
+        <div class="editor-nav">
+          <button type="button" class="btn" id="editor-prev" aria-label="Acorde anterior">‹</button>
+          <p class="editor-chord-name" id="editor-chord-name">—</p>
+          <button type="button" class="btn" id="editor-next" aria-label="Próximo acorde">›</button>
+        </div>
+        <p class="editor-kicker" id="editor-nav-meta" style="text-align:center;text-transform:none;letter-spacing:0">—</p>
+
+        <div class="editor-detect" id="editor-detect">
+          <p class="editor-detect__label">Detectado pelo shape</p>
+          <p class="editor-detect__name" id="editor-detected-name">—</p>
+          <p class="editor-detect__notes" id="editor-detected-notes"></p>
+          <p class="editor-detect__alts" id="editor-detected-alts"></p>
+          <div class="editor-detect__actions" id="editor-detect-actions" hidden>
+            <button type="button" class="btn btn--warn" id="editor-adopt-name">Usar nome na cifra</button>
+            <button type="button" class="btn" id="editor-save-detected">Salvar shape com nome detectado</button>
+          </div>
+        </div>
+
+        <div class="fb-wrap">
+          <span class="fb-base-fret" id="fb-base-fret"></span>
+          <div class="fb-board" id="fb-board" aria-label="Diagrama do acorde"></div>
+          <div class="fb-string-labels">
+            <span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span>
+          </div>
+        </div>
+
+        <div class="str-inputs" aria-label="Cordas">
+          <input id="str-0" inputmode="text" maxlength="2" aria-label="Corda 6" />
+          <input id="str-1" inputmode="text" maxlength="2" aria-label="Corda 5" />
+          <input id="str-2" inputmode="text" maxlength="2" aria-label="Corda 4" />
+          <input id="str-3" inputmode="text" maxlength="2" aria-label="Corda 3" />
+          <input id="str-4" inputmode="text" maxlength="2" aria-label="Corda 2" />
+          <input id="str-5" inputmode="text" maxlength="2" aria-label="Corda 1" />
+        </div>
+        <label for="editor-shape">Shape (CifraClub)</label>
+        <input class="editor-shape" id="editor-shape" type="text" spellcheck="false" />
+
+        <div class="editor-actions">
+          <button type="button" class="btn" id="editor-save-voicing">Salvar voicing</button>
+          <button type="button" class="btn" id="editor-reset-voicing">Restaurar</button>
+          <button type="button" class="btn" id="editor-dl-shapes">Baixar shapes.json</button>
+        </div>
+        <p class="editor-status" id="editor-status"></p>
+      </div>
+
+      <div class="editor-panel">
+        <span class="editor-kicker">Acordes da faixa</span>
+        <p style="font-size:.74rem;color:var(--muted);margin:0 0 .55rem">Dourado = editado · tracejado = sem diagrama no dict</p>
+        <div class="editor-pills" id="editor-pills"></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="cifra-utils.js"></script>
+  <script src="chord-editor.js"></script>
+  <script src="annotate.js"></script>
+</body>
+</html>

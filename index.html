@@ -778,12 +778,182 @@
       color: rgba(240, 248, 252, .55);
     }
     .cifra-diagram { display: block; }
+
+    /* —— Karaoke piloto (faixa 1+) —— */
+    .karaoke-fab.is-available {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .karaoke-fab {
+      position: fixed;
+      top: max(14px, calc(var(--video-lift) * 0.28));
+      right: 88px;
+      z-index: 11;
+      font-family: inherit;
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .42rem .72rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .22);
+      background: rgba(8, 12, 18, .42);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: rgba(255, 255, 255, .88);
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, .28);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-5px);
+      transition: opacity .32s ease, transform .32s ease, border-color .2s ease, color .2s ease, background .2s ease;
+    }
+    .karaoke-fab.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .karaoke-fab:hover:not(:disabled) {
+      border-color: rgba(255, 255, 255, .36);
+      background: rgba(12, 18, 26, .55);
+      color: #fff;
+    }
+    .karaoke-fab[aria-pressed="true"] {
+      border-color: #f0c27a;
+      color: #f0c27a;
+      background: rgba(240, 194, 122, .12);
+    }
+    .karaoke-fab:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+    .karaoke-lane {
+      position: fixed;
+      left: 50%;
+      bottom: calc(var(--player-h) + 10px);
+      transform: translateX(-50%);
+      width: min(520px, calc(100vw - var(--sidebar-w) - 48px));
+      height: 118px;
+      z-index: 16;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+    .karaoke-lane.is-open {
+      opacity: 1;
+    }
+    .karaoke-lane__hit {
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+      width: 72px;
+      height: 4px;
+      margin-left: -36px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, transparent, #f0c27a 20%, #f0c27a 80%, transparent);
+      box-shadow: 0 0 14px rgba(240, 194, 122, .55);
+    }
+    .karaoke-lane__hit::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 4px;
+      width: 64px;
+      height: 28px;
+      margin-left: -32px;
+      border: 1px dashed rgba(240, 194, 122, .35);
+      border-bottom: 0;
+      border-radius: 8px 8px 0 0;
+    }
+    .karaoke-lane__track {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .karaoke-block {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      min-width: 52px;
+      padding: .32rem .55rem;
+      border-radius: 8px;
+      border: 1px solid rgba(240, 194, 122, .45);
+      background: rgba(12, 16, 22, .72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
+      will-change: transform;
+    }
+    .karaoke-block.is-hit {
+      border-color: #f0c27a;
+      background: rgba(240, 194, 122, .22);
+      color: #fff4dc;
+      box-shadow: 0 0 20px rgba(240, 194, 122, .45);
+    }
+    .karaoke-block.is-current {
+      min-width: 58px;
+      font-size: .9rem;
+      z-index: 2;
+    }
+    .karaoke-block.is-falling {
+      opacity: .92;
+      z-index: 1;
+    }
+    .karaoke-lane__wait {
+      position: absolute;
+      left: 50%;
+      top: 8px;
+      transform: translateX(-50%);
+      font-size: .68rem;
+      letter-spacing: .06em;
+      color: rgba(240, 194, 122, .85);
+      text-shadow: 0 1px 6px rgba(0, 0, 0, .5);
+      white-space: nowrap;
+    }
+    .karaoke-offset-hint {
+      position: fixed;
+      left: 50%;
+      bottom: calc(var(--player-h) + 132px);
+      transform: translateX(-50%) translateY(6px);
+      z-index: 10;
+      font-size: .68rem;
+      letter-spacing: .06em;
+      color: rgba(255, 255, 255, .9);
+      background: rgba(8, 12, 18, .72);
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 6px;
+      padding: .28rem .55rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .karaoke-offset-hint.is-visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    @media (max-width: 720px) {
+      .karaoke-fab { right: 78px; font-size: .62rem; padding: .38rem .58rem; }
+      .karaoke-lane { width: min(92vw, 380px); }
+    }
   </style>
 </head>
 <body>
   <div class="yt-bg" aria-hidden="true"><div id="yt-player-host"></div></div>
   <div class="overlay" aria-hidden="true"></div>
   <div class="ambient-bleed" aria-hidden="true"></div>
+
+  <div class="karaoke-lane" id="karaoke-lane" aria-hidden="true" aria-label="Karaoke de acordes">
+    <p class="karaoke-lane__wait" id="karaoke-wait" aria-live="polite"></p>
+    <div class="karaoke-lane__track" id="karaoke-track"></div>
+    <div class="karaoke-lane__hit" aria-hidden="true"></div>
+  </div>
+  <div class="karaoke-offset-hint" id="karaoke-offset-hint" aria-live="polite"></div>
 
   <aside class="cifra-panel is-diagrams-collapsed" id="cifra-panel" aria-hidden="true" aria-label="Cifra e acordes">
     <header class="cifra-panel__head" id="cifra-head">
@@ -814,6 +984,8 @@
     <button type="button" class="cifra-panel__resize cifra-panel__resize--br" id="cifra-resize-br" aria-label="Redimensionar canto inferior direito" data-resize="br"></button>
   </aside>
 
+    <a href="annotate.html" class="cifra-fab is-visible" style="right: 168px; text-decoration:none" title="Anotar acordes manualmente">Anotar</a>
+    <button type="button" class="karaoke-fab" id="btn-karaoke" aria-pressed="false" title="Karaoke de acordes (piloto)">Karaoke</button>
   <button type="button" class="cifra-fab" id="btn-cifra" aria-pressed="false" title="Cifra e diagramas">Cifra</button>
 
   <div class="sidebar-peek" id="sidebar-peek" aria-hidden="true"></div>
@@ -875,6 +1047,7 @@
 
   <script src="https://www.youtube.com/iframe_api"></script>
   <script src="cifra-overlay.js"></script>
+  <script src="cifra-karaoke.js"></script>
   <script>
     const SYNC_THRESHOLD = 0.04;
     const YT_DRIFT_THRESHOLD = 0.12;
@@ -903,6 +1076,12 @@
     const guitarEl = new Audio();
     vocalsEl.preload = "auto";
     guitarEl.preload = "auto";
+
+    window.stefanoPlayer = {
+      getTime: () => guitarEl.currentTime || 0,
+      isPlaying: () => !vocalsEl.paused,
+    };
+    if (window.CifraKaraoke) CifraKaraoke.init(window.stefanoPlayer);
     vocalsEl._userMuted = false;
     guitarEl._userMuted = false;
 
@@ -1259,6 +1438,7 @@
     function syncLoop() {
       syncStems();
       syncYoutube();
+      if (window.CifraKaraoke) CifraKaraoke.tick();
       rafId = requestAnimationFrame(syncLoop);
     }
 
@@ -1327,6 +1507,8 @@
       updatePlayButtonState();
       if (window.CifraOverlay) CifraOverlay.loadForTrack(track);
       else window.__stefanoCifraTrack = track;
+      if (window.CifraKaraoke) CifraKaraoke.loadForTrack(track);
+      else window.__stefanoKaraokeTrack = track;
 
       if (!hasStems) {
         duration = 0;
@@ -1396,6 +1578,7 @@
         }
         setPlayIcon(true);
         if (!rafId) syncLoop();
+        if (window.CifraKaraoke) CifraKaraoke.tick();
       } catch (err) {
         if (err.message === "cancelled") return;
         if (err.message === "stems missing") {
@@ -1414,6 +1597,7 @@
       guitarEl.pause();
       if (ytPlayer && ytReady) ytPlayer.pauseVideo();
       setPlayIcon(false);
+      if (window.CifraKaraoke) CifraKaraoke.refresh();
     }
 
     function togglePlayPause() {
@@ -1441,6 +1625,7 @@
       const t = ratio * dur;
       seekAll(t);
       updateProgressUI(ratio);
+      if (window.CifraKaraoke) CifraKaraoke.refresh();
     }
 
     let scrubbing = false;
@@ -1537,6 +1722,7 @@
       const dur = duration || vocalsEl.duration;
       if (!dur) return;
       updateProgressUI(vocalsEl.currentTime / dur);
+      if (window.CifraKaraoke) CifraKaraoke.tick();
     });
     vocalsEl.addEventListener("ended", () => {
       const next = findReadyIndex(currentIndex, 1);
@@ -1558,8 +1744,9 @@
 
     function showCifraFab() {
       const fab = document.getElementById("btn-cifra");
-      if (!fab) return;
-      fab.classList.add("is-visible");
+      const kfab = document.getElementById("btn-karaoke");
+      if (fab) fab.classList.add("is-visible");
+      if (kfab && (kfab.classList.contains("is-available") || !kfab.disabled)) kfab.classList.add("is-visible");
       scheduleCifraFabHide();
     }
 
@@ -1567,8 +1754,9 @@
       clearTimeout(cifraFabHideTimer);
       cifraFabHideTimer = setTimeout(() => {
         const fab = document.getElementById("btn-cifra");
-        if (!fab || fab.matches(":hover")) return;
-        fab.classList.remove("is-visible");
+        const kfab = document.getElementById("btn-karaoke");
+        if (fab && !fab.matches(":hover")) fab.classList.remove("is-visible");
+        if (kfab && !kfab.matches(":hover")) kfab.classList.remove("is-visible");
       }, SIDEBAR_IDLE_MS);
     }
 
@@ -1584,10 +1772,15 @@
     scheduleSidebarHide();
 
     const cifraFab = document.getElementById("btn-cifra");
+    const karaokeFab = document.getElementById("btn-karaoke");
     if (cifraFab) {
       cifraFab.addEventListener("mouseenter", () => clearTimeout(cifraFabHideTimer));
       cifraFab.addEventListener("mouseleave", scheduleCifraFabHide);
       scheduleCifraFabHide();
+    }
+    if (karaokeFab) {
+      karaokeFab.addEventListener("mouseenter", () => clearTimeout(cifraFabHideTimer));
+      karaokeFab.addEventListener("mouseleave", scheduleCifraFabHide);
     }
 
     fetch("manifest.json")
@@ -1605,12 +1798,17 @@
       .catch(() => {
         els.trackList.innerHTML = "<li style='padding:1rem;color:var(--muted)'>Erro ao carregar manifest.json</li>";
       });
+
   </script>
   <script>
     CifraOverlay.init();
     if (window.__stefanoCifraTrack) {
       CifraOverlay.loadForTrack(window.__stefanoCifraTrack);
       delete window.__stefanoCifraTrack;
+    }
+    if (window.__stefanoKaraokeTrack && window.CifraKaraoke) {
+      CifraKaraoke.loadForTrack(window.__stefanoKaraokeTrack);
+      delete window.__stefanoKaraokeTrack;
     }
   </script>
 </body>

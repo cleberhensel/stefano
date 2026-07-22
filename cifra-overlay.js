@@ -448,5 +448,5 @@
     });
   }
 
-  window.CifraOverlay = { init, loadForTrack, setOpen };
+  window.CifraOverlay = { init, loadForTrack, setOpen, setActiveIndex };
 })();

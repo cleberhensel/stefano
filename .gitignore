@@ -18,5 +18,14 @@ arranjo/
 # Demucs output
 _demucs_out/
 
+# Referências locais pesadas (songbooks etc.)
+referencias/
+
+# Logs locais
+*.log
+ultimo-run*.log
+
 # macOS
 .DS_Store
+.code-to-podcast/
+.squadagent/
